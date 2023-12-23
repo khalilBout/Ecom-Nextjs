@@ -9,11 +9,13 @@ import { motion } from "framer-motion";
 import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 import { GlobalContext } from "@/services/context/GlobalContext";
+import ItemCard from "@/app/components/cardPage/ItemCard";
 
 const SearchBar = () => {
-  const { cart } = useContext(GlobalContext);
+  const { cart, isAuthUser, user, setIsAuthUser } = useContext(GlobalContext);
   const searchParams = useSearchParams();
   const { replace } = useRouter();
+  const router = useRouter();
   const pathname = usePathname();
 
   const handleSearch = useDebouncedCallback((e) => {
@@ -28,8 +30,26 @@ const SearchBar = () => {
     replace(`${pathname}?${params}`);
   }, 300);
 
+  const [showCard, setShowCard] = useState(false);
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
+
+  const logout = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/user/logout", {
+        method: "GET",
+      });
+      const ruselt = await res.json();
+      console.log("ruselt", ruselt);
+      // toast.success("Logout successful");
+      if (ruselt.success) {
+        router.refresh();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // await axios.get("/api/user/logout");
+  };
 
   return (
     <>
@@ -75,7 +95,15 @@ const SearchBar = () => {
             {/* user bar */}
             <div className="flex gap-4 mt-2 lg:mt-0 justify-end items-center pr-6 cursor-pointer relative">
               <div onClick={() => setShowUser(!showUser)} className="flex ">
-                <FaUser size={22} />
+                {user ? (
+                  <>
+                    <div className="w-[30px] h-[30px] rounded-full bg-green-400 border-[red] border-[1px] flex justify-start items-center ">
+                      <p>{user?.username}</p>
+                    </div>
+                  </>
+                ) : (
+                  <FaUser size={22} />
+                )}
                 <FaCaretDown size={22} />
               </div>
               {showUser && (
@@ -85,36 +113,87 @@ const SearchBar = () => {
                   transition={{ duration: 0.5 }}
                   className="absolute top-8 right-0 z-50 bg-primeColor w-44 text-[#767676] h-auto p-4 pb-6"
                 >
-                  <Link href="/account/login">
-                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Login
-                    </li>
-                  </Link>
-                  <Link
-                    onClick={() => setShowUser(false)}
-                    href="/account/register"
-                  >
-                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Sign Up
-                    </li>
-                  </Link>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Profile
-                  </li>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Others
-                  </li>
+                  {isAuthUser ? (
+                    <>
+                      <Link href="/profile" onClick={() => setShowUser(false)}>
+                        <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                          Profile
+                        </li>
+                      </Link>
+
+                      <li
+                        onClick={() => {
+                          setShowUser(false);
+                          logout();
+                        }}
+                        className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer"
+                      >
+                        Logout
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/account/login"
+                        onClick={() => setShowUser(false)}
+                      >
+                        <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                          Login
+                        </li>
+                      </Link>
+                      <Link
+                        onClick={() => setShowUser(false)}
+                        href="/account/register"
+                      >
+                        <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                          Sign Up
+                        </li>
+                      </Link>
+                    </>
+                  )}
                 </motion.ul>
               )}
-              <Link href="/card">
-                <div className="relative">
+              <div>
+                <div
+                  className="relative"
+                  onClick={() => setShowCard(!showCard)}
+                >
                   <FaShoppingCart />
                   <span className="absolute font-titleFont top-3 -right-2 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-white">
                     {/* {products.length > 0 ? products.length : 0} */}
                     {cart?.cartItems ? <> {cart?.cartItems.length} </> : <>0</>}
                   </span>
+                  {/* card box */}
+                  {showCard && (
+                    <div className="w-[300px] bg-red-200 absolute top-8 right-0 h-auto shadow-2xl  transition-all duration-300 z-20 px-4 lgl:px-[35px]">
+                      <div className="uppercase text-sm font-semibold ">
+                        Shopping Bag (0)
+                        <div className="">
+                          {cart?.cartItems.map((item, index) => (
+                            <ItemCard key={index} item={item} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* {showCard && (
+                    <div className={`${showCard ? "right-0":"-right-full"} w-full bg-white fixed top-0 h-full shadow-2xl mdl:w-[300px] transition-all duration-300 z-20 px-4 lgl::px-[35px] `}>
+                      
+                      {cart?.cartItems.map((item, index) => (
+                        <ItemCard key={index} item={item} />
+                      ))}
+                      <div className=" w-full "></div>
+                      <Link
+                        href="/checkout"
+                        className="w-full h-[40px] bg-primeColor text-lightText hover:bg-lightText hover:text-primeColor cursor-pointer"
+                      >
+                        Checkout
+                      </Link>
+                    </div>
+                  )} */}
                 </div>
-              </Link>
+              </div>
             </div>
           </div>
         </div>

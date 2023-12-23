@@ -1,7 +1,7 @@
 "use client";
 import Cookies from "js-cookie";
 import { createContext, useEffect, useState } from "react";
-
+import { getUser } from "@/services/getData/user/index";
 export const GlobalContext = createContext(null);
 
 export default function GlobalState({ children }) {
@@ -133,10 +133,26 @@ export default function GlobalState({ children }) {
 
   // manage token
   const [isAuthUser, setIsAuthUser] = useState(null);
+  const [user, setUser] = useState(null);
   const token = Cookies.get("token");
+  const userData = async () => {
+    const res = await getUser();
+    if (res.status === 200) {
+      const userInfo = res.data;
+      const dataUser = {
+        id: userInfo._id,
+        username: userInfo.username,
+        email: userInfo.email,
+      };
+      setUser(dataUser);
+    }
+    return user;
+  };
+
   useEffect(() => {
     if (Cookies.get("token") !== undefined) {
       setIsAuthUser(true);
+      userData();
     } else {
       setIsAuthUser(false);
     }
@@ -149,6 +165,7 @@ export default function GlobalState({ children }) {
         setShowCartModal,
         pageLevelLoader,
         setPageLevelLoader,
+        user,
         isAuthUser,
         setIsAuthUser,
         componentLevelLoader,
@@ -159,8 +176,6 @@ export default function GlobalState({ children }) {
         decQttOfProduct,
         deleteItemFromCart,
         clearCart,
-        // addresses,
-        // setAddresses,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Slider from "react-slick";
-import Product from "@/app/components/ProductItems/Product";
+import Product from "../../ProductItems/Product";
 
 import SampleNextArrow from "../../ProductItems/SampleNextArrow";
 import SamplePrevArrow from "../../ProductItems/SamplePrevArrow";

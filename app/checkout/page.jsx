@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ItemCard from "@/app/components/cardPage/ItemCard";
 
 import { GlobalContext } from "@/services/context/GlobalContext";
@@ -7,26 +7,19 @@ import ItemCardCheckout from "../components/cardPage/ItemCardCheckout";
 import EmptyCard from "../components/checkoutPage/EmptyCard";
 import TotalsCart from "../components/checkoutPage/TotalsCart";
 import Address from "../components/checkoutPage/Address";
-import { addNewOrder } from "@/services/getData/order";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Checkout = () => {
-  const { cart, clearCart } = useContext(GlobalContext);
+  const { cart, clearCart, user } = useContext(GlobalContext);
   const router = useRouter();
   const [addressClient, setAddressClient] = useState(null);
 
-  const [user, setUser] = useState({
-    userId: "",
-    username: "",
-    email: "",
-  });
-
   const OrderData = {
     client: {
-      userId: user?._id,
-      userName: user?.username,
-      email: user?.email,
+      userId: user?.id || null,
+      userName: user?.username || null,
+      email: user?.email || null,
     },
     shippingAddress: {
       clientName: addressClient?.clientName,
@@ -45,6 +38,7 @@ const Checkout = () => {
     })),
   };
   const sendOrder = async () => {
+    console.log("order data:", OrderData);
     try {
       const response = await fetch("http://localhost:3000/api/order", {
         method: "POST",
@@ -90,8 +84,30 @@ const Checkout = () => {
               {/* Totals Cart  */}
               <TotalsCart />
             </div>
+            {/* user info  */}
+
             {/* Info Address  */}
             <div className="w-full mdl:w-1/2 mt-4">
+              <div className="">
+                {user ? (
+                  <>
+                    <p className="text-[22px] font-bold ">
+                      Hi <span className="text-[red]"> {user.username} </span>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-[20px]">you are not login </h2>
+                    <Link
+                      href="/account/login"
+                      className="bg-green-200 px-3 py-1 rounded-lg cursor-pointer hover:bg-slate-400"
+                    >
+                      Login
+                    </Link>
+                  </>
+                )}
+              </div>
+
               {addressClient === null ? (
                 <>
                   <Address setAddressClient={setAddressClient} />

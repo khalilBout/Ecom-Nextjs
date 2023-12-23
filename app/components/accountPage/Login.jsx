@@ -54,14 +54,15 @@ const Login = () => {
           // toast.success("Login success");
           setEmail("");
           setPassword("");
-          router.refresh().push("/");
+          router.refresh();
         }
         if (response.status === 400) {
           setErrorMsg("user dos't exist.");
           // toast.success("Login success");
+          // router.refresh();
+          setErrorMsg("user dos't exist.");
           setEmail("");
           setPassword("");
-          // router.refresh().push("/");
         }
       } catch (error) {
         console.log("Login failed", error);

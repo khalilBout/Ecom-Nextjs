@@ -2,9 +2,10 @@
 import Image from "next/image";
 import React, { useContext } from "react";
 import { GlobalContext } from "@/services/context/GlobalContext";
-
+import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
 import { ImCross } from "react-icons/im";
 import noImg from "@/public/empty.png";
+import Link from "next/link";
 
 const ItemCard = ({ item }) => {
   const {
@@ -16,116 +17,158 @@ const ItemCard = ({ item }) => {
     deleteItemFromCart,
     clearCart,
   } = useContext(GlobalContext);
-
+  const { titleProduct, imageModel, Qt, price } = item;
   return (
-    <div
-      key={item.titleProduct}
-      className="flex rounded-md mx-4 my-2 p-2 relative shadow-testShadow gap-2"
-    >
-      <div className="flex-shrink-0 overflow-hidden rounded-md ">
-        <Image
-          src={item.imageModel || noImg}
-          width={90}
-          height={110}
-          alt={item.titleProduct}
-          className="object-cover object-center"
-        />
-      </div>
-      <div className="flex-1 ">
-        <div className="flex flex-col">
-          <div className="font-bold flex justify-between text-[16px] mdl:text-[20px] text-gray-900">
-            <h2 className="">
-              <a>{item.titleProduct}</a>
+    <div className="flex">
+      <div className="w-full min-h-[150px] flex items-center gap-x-4">
+        <Link href="/">
+          <img
+            className="max-w-[80px]  "
+            src={imageModel || noImg}
+            alt={titleProduct}
+          />
+        </Link>
+
+        <div className="w-full flex flex-col">
+          {/* title & remove Icon */}
+          <div className="flex justify-between mb-2">
+            {/* title  */}
+            <h2 className="text-sm uppercase font-medium max-w-[240px] text-primeColor hover:underline">
+              {titleProduct}
             </h2>
+            <div className="text-xl cursor-pointer">
+              <IoMdClose className="text-gray-500 hover:text-red-500 transition" />
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            {item.finalPrice && item.finalPrice > 0 ? (
-              <span className="text-md font-light text-red-600 text-[15px] mdl:text-[18px]">
-                ${item.finalPrice}
-              </span>
-            ) : (
-              <span className="font-bold text-md text-red-600 text-[15px] mdl:text-[18px]">
-                ${item.price}
-              </span>
-            )}
-
-            <span className="text-primeColor text-[13px] mdl:text-[15px]">
-              X
-            </span>
-            <span>{item.Qt}</span>
+          <div className=" flex gap-x-2 h-[36px] text-sm">
+            {/* Qty  */}
+            <div className="flex flex-1 max-w-[100px] items-center h-full border text-primeColor font-medium">
+              <div className="flex-1 h-full flex justify-center items-center cursor-pointer">
+                <IoMdRemove />
+              </div>
+              <div className="h-full flex justify-start items-center px-2">
+                {Qt}
+              </div>
+              <div className="flex-1 h-full flex justify-center items-center cursor-pointer">
+                <IoMdAdd />
+              </div>
+            </div>
+            {/* Price  */}
+            <div className="">{price}</div>
+            {/* Finel Price */}
+            <div className="">Finel Price</div>
           </div>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <div className="flex justify-start items-center flex-shrink-0">
-            <h2 className="font-bold">Color: </h2>
-            <span
-              className="w-[16px] h-[16px] rounded-full ml-2 "
-              style={{ backgroundColor: item.Color }}
-            ></span>
-          </div>
-          <div className="">
-            <h2 className="font-bold">
-              size:
-              <span className="px-2 mx-1 rounded-md bg-actionColor">
-                {item.sizeSelect}
-              </span>
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div>
-        {/* delete btn */}
-        <button
-          type="button"
-          className="absolute top-2 left-2 font-medium px-1 rounded-md cursor-pointer"
-          onClick={() =>
-            deleteItemFromCart(item.idProduct, item.Color, item.sizeSelect)
-          }
-        >
-          <ImCross className="text-primeColor hover:text-red-500 duration-300 cursor-pointer" />
-        </button>
-        {/* quantity  */}
-        <div className="mt-4 w-[25px] h-[80px] flex flex-col border-gray-100 border-[1px] rounded-md">
-          <button
-            onClick={() =>
-              decQttOfProduct(
-                item.idProduct,
-                item.Color,
-                item.sizeSelect,
-                item.sizeSelectStoke
-              )
-            }
-            data-action="decrement"
-            className="w-full bg-actionColor text-gray-600 hover:text-gray-700 hover:bg-gray-400 cursor-pointer outline-none"
-          >
-            <span className="m-auto text-2xl font-bold text-black">-</span>
-          </button>
-
-          <input
-            // type="number"
-            className=" focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  mdl:text-basecursor-default flex items-center text-gray-900  outline-none custom-input-number"
-            name="custom-input-number"
-            value={item.Qt}
-            readOnly
-          ></input>
-
-          <button
-            onClick={() =>
-              incQttOfProduct(
-                item.idProduct,
-                item.Color,
-                item.sizeSelect,
-                item.sizeSelectStoke
-              )
-            }
-            data-action="increment"
-            className="w-full bg-actionColor text-gray-600 hover:text-gray-700 hover:bg-gray-400 cursor-pointer outline-none"
-          >
-            <span className="m-auto text-2xl font-bold text-black">+</span>
-          </button>
         </div>
       </div>
     </div>
+    // <div
+    //   key={item.titleProduct}
+    //   className="flex rounded-md mx-4 my-2 p-2 relative shadow-testShadow gap-2"
+    // >
+    //   <div className="flex-shrink-0 overflow-hidden rounded-md ">
+    //     <Image
+    //       src={item.imageModel || noImg}
+    //       width={90}
+    //       height={110}
+    //       alt={item.titleProduct}
+    //       className="object-cover object-center"
+    //     />
+    //   </div>
+    //   <div className="flex-1 ">
+    //     <div className="flex flex-col">
+    //       <div className="font-bold flex justify-between text-[16px] mdl:text-[20px] text-gray-900">
+    //         <h2 className="">
+    //           <a>{item.titleProduct}</a>
+    //         </h2>
+    //       </div>
+    //       <div className="flex items-center gap-2">
+    //         {item.finalPrice && item.finalPrice > 0 ? (
+    //           <span className="text-md font-light text-red-600 text-[15px] mdl:text-[18px]">
+    //             ${item.finalPrice}
+    //           </span>
+    //         ) : (
+    //           <span className="font-bold text-md text-red-600 text-[15px] mdl:text-[18px]">
+    //             ${item.price}
+    //           </span>
+    //         )}
+
+    //         <span className="text-primeColor text-[13px] mdl:text-[15px]">
+    //           X
+    //         </span>
+    //         <span>{item.Qt}</span>
+    //       </div>
+    //     </div>
+    //     <div className="flex flex-wrap gap-2">
+    //       <div className="flex justify-start items-center flex-shrink-0">
+    //         <h2 className="font-bold">Color: </h2>
+    //         <span
+    //           className="w-[16px] h-[16px] rounded-full ml-2 "
+    //           style={{ backgroundColor: item.Color }}
+    //         ></span>
+    //       </div>
+    //       <div className="">
+    //         <h2 className="font-bold">
+    //           size:
+    //           <span className="px-2 mx-1 rounded-md bg-actionColor">
+    //             {item.sizeSelect}
+    //           </span>
+    //         </h2>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div>
+    //     {/* delete btn */}
+    //     <button
+    //       type="button"
+    //       className="absolute top-2 left-2 font-medium px-1 rounded-md cursor-pointer"
+    //       onClick={() =>
+    //         deleteItemFromCart(item.idProduct, item.Color, item.sizeSelect)
+    //       }
+    //     >
+    //       <ImCross className="text-primeColor hover:text-red-500 duration-300 cursor-pointer" />
+    //     </button>
+    //     {/* quantity  */}
+    //     <div className="mt-4 w-[25px] h-[80px] flex flex-col border-gray-100 border-[1px] rounded-md">
+    //       <button
+    //         onClick={() =>
+    //           decQttOfProduct(
+    //             item.idProduct,
+    //             item.Color,
+    //             item.sizeSelect,
+    //             item.sizeSelectStoke
+    //           )
+    //         }
+    //         data-action="decrement"
+    //         className="w-full bg-actionColor text-gray-600 hover:text-gray-700 hover:bg-gray-400 cursor-pointer outline-none"
+    //       >
+    //         <span className="m-auto text-2xl font-bold text-black">-</span>
+    //       </button>
+
+    //       <input
+    //         // type="number"
+    //         className=" focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  mdl:text-basecursor-default flex items-center text-gray-900  outline-none custom-input-number"
+    //         name="custom-input-number"
+    //         value={item.Qt}
+    //         readOnly
+    //       ></input>
+
+    //       <button
+    //         onClick={() =>
+    //           incQttOfProduct(
+    //             item.idProduct,
+    //             item.Color,
+    //             item.sizeSelect,
+    //             item.sizeSelectStoke
+    //           )
+    //         }
+    //         data-action="increment"
+    //         className="w-full bg-actionColor text-gray-600 hover:text-gray-700 hover:bg-gray-400 cursor-pointer outline-none"
+    //       >
+    //         <span className="m-auto text-2xl font-bold text-black">+</span>
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

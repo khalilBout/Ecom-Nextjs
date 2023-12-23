@@ -21,7 +21,7 @@ const page = async ({ searchParams }) => {
         <div className="w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10">
           <div className="w-full flex flex-col md:flex-row md:items-center justify-between mt-2">
             <PaginationCom count={count} />
-            <SortBy />
+            {/* <SortBy /> */}
           </div>
           <DisplayProduct allProducts={allProducts} count={count} />
         </div>
