@@ -6,7 +6,7 @@ import Product from "@/models/product";
 export const POST = async (request) => {
   const body = await request.json();
 
-  const { client, shippingAddress, orderItems } = body;
+  const { userId, userName, email, shippingAddress, orderItems } = body;
   const promises = orderItems.map(async (item) => {
     const productOrder = await Product.findById(item.productID);
     const productID = productOrder._id;
@@ -43,7 +43,9 @@ export const POST = async (request) => {
     shippingCharge
   );
   const dataOrder = {
-    client,
+    userId,
+    userName,
+    email,
     shippingAddress,
     orderProduct,
     totolPyment,
@@ -51,6 +53,7 @@ export const POST = async (request) => {
 
   try {
     await connectDB();
+    console.log("order data from api", dataOrder);
     await Order.create(dataOrder);
     return new NextResponse("Order created. ", { status: 201 });
   } catch (err) {

@@ -16,11 +16,9 @@ const Checkout = () => {
   const [addressClient, setAddressClient] = useState(null);
 
   const OrderData = {
-    client: {
-      userId: user?.id || null,
-      userName: user?.username || null,
-      email: user?.email || null,
-    },
+    userId: user?.id || null,
+    userName: user?.username || null,
+    email: user?.email || null,
     shippingAddress: {
       clientName: addressClient?.clientName,
       address: addressClient?.address,

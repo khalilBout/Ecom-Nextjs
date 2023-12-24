@@ -1,6 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { BiSearch } from "react-icons/bi";
+import React, { useContext, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
@@ -10,6 +9,8 @@ import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 import { GlobalContext } from "@/services/context/GlobalContext";
 import ItemCard from "@/app/components/cardPage/ItemCard";
+import Image from "next/image";
+import { emptyCart } from "@/public/images/index";
 
 const SearchBar = () => {
   const { cart, isAuthUser, user, setIsAuthUser } = useContext(GlobalContext);
@@ -154,44 +155,54 @@ const SearchBar = () => {
                 </motion.ul>
               )}
               <div>
-                <div
-                  className="relative"
-                  onClick={() => setShowCard(!showCard)}
-                >
-                  <FaShoppingCart />
+                <div className="relative">
+                  <FaShoppingCart onClick={() => setShowCard(!showCard)} />
                   <span className="absolute font-titleFont top-3 -right-2 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-white">
                     {/* {products.length > 0 ? products.length : 0} */}
                     {cart?.cartItems ? <> {cart?.cartItems.length} </> : <>0</>}
                   </span>
                   {/* card box */}
                   {showCard && (
-                    <div className="w-[300px] bg-red-200 absolute top-8 right-0 h-auto shadow-2xl  transition-all duration-300 z-20 px-4 lgl:px-[35px]">
-                      <div className="uppercase text-sm font-semibold ">
-                        Shopping Bag (0)
-                        <div className="">
+                    <motion.ul
+                      initial={{ y: 30, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute top-8 right-0 z-50 bg-primeColor w-[320px] text-[#767676] h-auto px-4 pb-2"
+                    >
+                      {cart?.cartItems.length > 0 ? (
+                        <>
                           {cart?.cartItems.map((item, index) => (
                             <ItemCard key={index} item={item} />
                           ))}
-                        </div>
-                      </div>
-                    </div>
+                          <div className=" my-2 w-full h-[35px]">
+                            <Link
+                              href="/checkout"
+                              className="w-full h-full bg-green-200 text-lightText hover:bg-lightText hover:text-primeColor cursor-pointer flex justify-center items-center"
+                              onClick={() => setShowCard(false)}
+                            >
+                              Checkout
+                            </Link>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="my-4 flex flex-col items-center justify-center ">
+                            <Image
+                              className="w-40 rounded-lg p-4 mx-auto"
+                              src={emptyCart}
+                              alt="emptyCart"
+                            />
+                            <Link href="/shop">
+                              <button className="border bg-primeColor rounded-md cursor-pointer hover:bg-black active:bg-gray-900 px-8 py-2 font-titleFont font-semibold text-lg text-gray-200 hover:text-white duration-300">
+                                Go Shopping
+                              </button>
+                            </Link>
+                          </div>
+                          {/* <EmptyCard /> */}
+                        </>
+                      )}
+                    </motion.ul>
                   )}
-
-                  {/* {showCard && (
-                    <div className={`${showCard ? "right-0":"-right-full"} w-full bg-white fixed top-0 h-full shadow-2xl mdl:w-[300px] transition-all duration-300 z-20 px-4 lgl::px-[35px] `}>
-                      
-                      {cart?.cartItems.map((item, index) => (
-                        <ItemCard key={index} item={item} />
-                      ))}
-                      <div className=" w-full "></div>
-                      <Link
-                        href="/checkout"
-                        className="w-full h-[40px] bg-primeColor text-lightText hover:bg-lightText hover:text-primeColor cursor-pointer"
-                      >
-                        Checkout
-                      </Link>
-                    </div>
-                  )} */}
                 </div>
               </div>
             </div>

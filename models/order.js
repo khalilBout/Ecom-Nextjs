@@ -4,20 +4,18 @@ import User from "./user";
 import Profile from "./profile";
 
 const OrderSchema = new mongoose.Schema({
-  client: {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: [false],
-    },
-    userName: {
-      type: String,
-      required: [false],
-    },
-    email: {
-      type: String,
-      required: [false],
-    },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: [false],
+  },
+  userName: {
+    type: String,
+    required: [false],
+  },
+  email: {
+    type: String,
+    required: [false],
   },
   shippingAddress: {
     profileId: {
