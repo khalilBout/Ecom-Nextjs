@@ -5,37 +5,31 @@ const FormAddProduct = ({ handelChange }) => {
   const typeList = ["New", "Best", "Soled"];
   return (
     <form>
-      <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
+      <div className="grid lg:grid-cols-2 gap-2 mx-2 ">
         <input
-          className=" h-[50px] w-[1/2] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-3"
+          className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
           placeholder="Name"
           type="text"
           name="title"
           onChange={handelChange}
         />
+
         <input
-          className=" h-[50px] w-[1/2] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-3 "
-          placeholder="desc..."
-          type="text"
-          name="desc"
-          onChange={handelChange}
-        />
-        <input
-          className=" h-[50px] w-[1/2] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-3"
+          className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
           placeholder="style"
           type="text"
           name="style"
           onChange={handelChange}
         />
         <input
-          className=" h-[50px] w-[1/2] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-3"
+          className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
           placeholder="price"
           type="number"
           name="price"
           onChange={handelChange}
         />
         <input
-          className=" h-[50px] w-[1/2] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-3"
+          className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
           placeholder="priceDrop"
           type="text"
           name="priceDrop"
@@ -43,12 +37,12 @@ const FormAddProduct = ({ handelChange }) => {
         />
 
         <select
-          className=" h-[50px] w-[1/2] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-3"
+          className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
           name="category"
           onChange={handelChange}
           required
         >
-          <option value="" className="text-gray-300">
+          <option value="" className="text-gray-300 h-[40px]">
             category
           </option>
           {categoryList?.map((cty) => (
@@ -58,7 +52,7 @@ const FormAddProduct = ({ handelChange }) => {
           ))}
         </select>
         <select
-          className=" h-[50px] w-[1/2] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-3"
+          className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
           name="type"
           onChange={handelChange}
         >
@@ -71,6 +65,14 @@ const FormAddProduct = ({ handelChange }) => {
             </option>
           ))}
         </select>
+
+        <textarea
+          className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1 "
+          placeholder="desc..."
+          type="text"
+          name="desc"
+          onChange={handelChange}
+        />
       </div>
     </form>
   );

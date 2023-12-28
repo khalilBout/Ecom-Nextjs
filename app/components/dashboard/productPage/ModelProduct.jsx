@@ -52,8 +52,10 @@ const ModelProduct = ({ caty, listModels, setListModels }) => {
     }
   };
   return (
-    <div className="py-2">
-      {/* <form> */}
+    <div className="bg-blue-100 p-4 rounded-md">
+      <h2 className="text-xl md:text-2xl font-semibold text-black">
+        Models Of Product:
+      </h2>
       {/* size  */}
       <div className="my-1 p-2 bg-gray-100 rounded-lg ">
         <SizeProduct size={size} setSize={setSize} caty={caty} />
@@ -123,6 +125,7 @@ const ModelProduct = ({ caty, listModels, setListModels }) => {
           </>
         )}
       </div>
+      {/* btn add Model  */}
       <div className="w-full flex justify-end">
         <button
           className=" text-[16px] bg-rose-400 rounded-lg px-4 py-2"

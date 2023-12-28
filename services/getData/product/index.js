@@ -53,7 +53,6 @@ export const getProductById = async (id) => {
     });
 
     const data = await res.json();
-
     return data;
   } catch (e) {
     console.log(e);

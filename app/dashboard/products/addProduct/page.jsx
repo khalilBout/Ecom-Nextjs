@@ -58,7 +58,7 @@ const Page = () => {
   };
 
   return (
-    <div className="">
+    <div className="w-full bg-slate-200">
       <h1 className="my-3 text-xl md:text-3xl font-semibold text-black mb-8">
         Create New Product
       </h1>
@@ -66,8 +66,7 @@ const Page = () => {
       <div className="">
         <FormAddProduct handelChange={handelChange} />
       </div>
-      <div className="m-2 p-2 border-2 rounded-lg">
-        <h2 className="">Model Of Product : </h2>
+      <div className="m-2 p-2 border-1 rounded-lg">
         <ModelProduct
           caty={form.category}
           listModels={listModels}

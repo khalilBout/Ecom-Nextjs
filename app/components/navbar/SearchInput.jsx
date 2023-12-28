@@ -56,7 +56,7 @@ const SearchBar = () => {
     <>
       <div className="w-full bg-[#F5F5F3] relative">
         <div className="max-w-container mx-auto">
-          <div className=" flex flex-col lg:flex-row lg:items-center justify-between w-full px-4 pb-4 lg:mb-2 h-full lg:h-20">
+          <div className=" flex flex-col lg:flex-row lg:items-center justify-between w-full px-4 pb-4  h-full lg:h-20">
             {/* category bar */}
             <div
               className="flex h-12 cursor-pointer items-center gap-2 text-primeColor"

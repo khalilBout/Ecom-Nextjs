@@ -1,8 +1,12 @@
+import { getProductById } from "@/services/getData/product";
+import FormUpdateProduct from "@/utils/action/FormUpdateProduct";
 import React from "react";
 
-const page = ({ params }) => {
+const page = async ({ params }) => {
   const id = params.id;
-  return <div>page update {id}</div>;
+  const data = await getProductById(id);
+
+  return <FormUpdateProduct data={data} />;
 };
 
 export default page;
