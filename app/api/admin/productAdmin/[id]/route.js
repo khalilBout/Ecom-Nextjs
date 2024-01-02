@@ -32,27 +32,30 @@ export const DELETE = async (request, { params }) => {
 export const PUT = async (request, { params }) => {
   const { id } = params;
   const {
-    newTitle,
-    newDesc,
-    newPrice,
-    newPriceDrop,
-    newCategory,
-    newSeller,
-    newType,
-    newStock,
+    category,
+    desc,
+    price,
+    priceDrop,
+    title,
+    style,
+    type,
+    modelDataSending,
   } = await request.json();
+
+  const finalPrice = price - price * priceDrop * 0.01;
 
   try {
     await connectDB();
     await Product.findByIdAndUpdate(id, {
-      title: newTitle,
-      desc: newDesc,
-      price: newPrice,
-      priceDrop: newPriceDrop,
-      category: newCategory,
-      seller: newSeller,
-      type: newType,
-      stock: newStock,
+      title: title,
+      desc: desc,
+      price: price,
+      priceDrop: priceDrop,
+      category: category,
+      finalPrice: finalPrice,
+      listModels: modelDataSending,
+      style: style,
+      type: type,
     });
     return new NextResponse("Product updated", { status: 200 });
   } catch (err) {

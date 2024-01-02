@@ -75,43 +75,49 @@ const Page = () => {
 
         {listModels && listModels.length > 0 ? (
           <>
-            <hr />
-            {listModels?.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-row w-[200px] rounded-md bg-green-400 m-4"
-              >
-                <div className="m-3">
-                  <Image
-                    src={item.url[0]}
-                    width={60}
-                    height={60}
-                    alt={item.selectedColor}
-                  />
-                </div>
-                <div className="">
-                  <div className="">
-                    <h3 className="text-[12px]">size:</h3>
-                    {item?.size.map((x) => (
-                      <p className="text-[10px] px-">
-                        {x.theSize} - {x.stoke} pice
-                      </p>
-                    ))}
-                    <div className="flex gap-2 items-center">
-                      <h3 className="text-[12px]">color:</h3>
-                      <div
-                        style={{
-                          width: "12px",
-                          height: "12px",
-                          borderRadius: "100%",
-                          backgroundColor: item.selectedColor,
-                        }}
-                      ></div>
+            <hr className=" border-1 border-red-900" />
+            <div className="flex gap-2 bg-blue-100">
+              {listModels?.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex flex-row w-[200px] m-4 border-r-2 border-red-900"
+                >
+                  <div className="my-1 mr-2 bg-slate-50 rounded-md">
+                    <Image
+                      src={item.url[0]}
+                      width={100}
+                      height={130}
+                      alt={item.selectedColor}
+                      className="rounded-md"
+                    />
+                  </div>
+                  <div className="my-1">
+                    <div className="">
+                      <h3 className="text-[14px] ">Size</h3>
+                      {item?.size.map((x) => (
+                        <div className="flex justify-start items-center">
+                          <p className="w-[35px] font-bold px-2 text-[13px] text-red-500">
+                            {x.theSize}:
+                          </p>
+                          <p className="text-[11px]">{x.stoke} Pice</p>
+                        </div>
+                      ))}
+                      <div className="flex gap-2 items-center">
+                        <h3 className="text-[14px]">Color</h3>
+                        <div
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                            borderRadius: "100%",
+                            backgroundColor: item.selectedColor,
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </>
         ) : (
           <></>

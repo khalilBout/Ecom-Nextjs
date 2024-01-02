@@ -1,10 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import UpdateModel from "@/app/components/dashboard/productPage/UpdateModel";
+import ModelProduct from "@/app/components/dashboard/productPage/ModelProduct";
 
 const FormUpdateProduct = ({ data }) => {
   const categoryList = ["man", "woman", "children"];
   const typeList = ["New", "Best", "Soled"];
+  const [addModel, setAddModel] = useState(false);
+  const [listModels, setListModels] = useState(data.listModels);
+
   const [form, setForm] = useState({
     title: data.title,
     desc: data.desc,
@@ -14,6 +18,7 @@ const FormUpdateProduct = ({ data }) => {
     priceDrop: data.priceDrop,
     category: data.category,
   });
+  const category = data?.category;
   const handelChange = (e) => {
     setForm({
       ...form,
@@ -21,15 +26,67 @@ const FormUpdateProduct = ({ data }) => {
     });
   };
 
-  const dataUpdated = {
-    ...form,
+  // delete Model
+  const deleteModel = (id) => {
+    const newList = listModels?.filter((x) => x._id !== id);
+    setListModels(newList);
   };
 
-  const updateProduct = () => {
-    console.log("update data:", dataUpdated);
+  // Fanction Update Models Data
+  const [modelChanged, setModelChanged] = useState([]);
+  const updateModels = () => {
+    let modelDataSending = [];
+    if (modelChanged.length > 0) {
+      // add element no changed
+      const modelNoChange = [];
+      const listId = modelChanged.map((item) => {
+        return item._id;
+      });
+      listModels.map((item) => {
+        const isInListChangeModel = listId.includes(item._id);
+        if (!isInListChangeModel) {
+          modelNoChange.push(item);
+        }
+      });
+      modelDataSending = [...modelChanged, ...modelNoChange];
+    } else {
+      listModels?.map((x) => modelDataSending.push(x));
+    }
+    // all data of product
+    const dataUpdated = {
+      ...form,
+      modelDataSending,
+    };
+
+    return dataUpdated;
+  };
+
+  // Sending Update Data
+  const sendUpdateData = async () => {
+    const dataUpdated = updateModels();
+    const id = data?._id;
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/admin/productAdmin/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+            // Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+          cache: "no-store",
+          body: JSON.stringify(dataUpdated),
+        }
+      );
+      const data = await res.json();
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div>
+      {/* info of Product  */}
       <form>
         <div className="grid lg:grid-cols-2 gap-2 mx-2 ">
           <input
@@ -108,17 +165,57 @@ const FormUpdateProduct = ({ data }) => {
           />
         </div>
       </form>
-      <div className="">
-        {data?.listModels.map((item, i) => (
-          <UpdateModel key={i} models={item} />
+      {/* info of model of product  */}
+      <div className="w-full">
+        <h2 className="text-2xl my-2">Update Info Models</h2>
+        {listModels?.map((item, i) => (
+          <div className="" key={i}>
+            <UpdateModel
+              models={item}
+              category={category}
+              modelChanged={modelChanged}
+              setModelChanged={setModelChanged}
+              deleteModel={deleteModel}
+            />
+          </div>
         ))}
       </div>
-      <button
-        className="px-4 py-2 bg-blue-600 cursor-pointer"
-        onClick={() => updateProduct()}
-      >
-        Update Product
-      </button>
+
+      {/* Add models  */}
+      <div>
+        {addModel && (
+          <div className=" w-full p-2">
+            <ModelProduct
+              caty={category}
+              listModels={listModels}
+              setListModels={setListModels}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col justify-between mx-4">
+        {/* Btn Add Model   */}
+
+        {!addModel && (
+          <div className="flex justify-start">
+            <button
+              className="w-1/2 px-4 py-2 bg-blue-300 hover:bg-blue-400 cursor-pointer rounded-md"
+              onClick={() => setAddModel(!addModel)}
+            >
+              Add Model
+            </button>
+          </div>
+        )}
+
+        {/* Btn Send Update Data   */}
+        <button
+          className="px-4 py-2 my-2 bg-primeColor text-lightText hover:bg-lightText hover:text-primeColor cursor-pointer rounded-md w-full"
+          onClick={() => sendUpdateData()}
+        >
+          Update Product
+        </button>
+      </div>
     </div>
   );
 };
