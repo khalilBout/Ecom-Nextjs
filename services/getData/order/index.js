@@ -39,6 +39,7 @@ export const getAllOrders = async () => {
   try {
     const res = await fetch(`${process.env.GLOBAL_URL}/api/admin/orderAdmin`, {
       method: "GET",
+      cache: "no-store",
     });
     const data = await res.json();
     return data;
@@ -80,6 +81,7 @@ export const deleteAOrder = async (id) => {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
         },
+        cache: "no-store",
       }
     );
     const data = await res.json();

@@ -2,8 +2,7 @@ import Product from "@/models/product";
 import connectDB from "@/utils/connectDB";
 
 export const getProducts = async (search, page, category) => {
-  console.log("category!", category);
-  const ITEM_PER_PAGE = 3;
+  const ITEM_PER_PAGE = 12;
   const regex = new RegExp(search, "i");
 
   try {
@@ -29,10 +28,11 @@ export const getProducts = async (search, page, category) => {
       })
         .limit(ITEM_PER_PAGE)
         .skip(ITEM_PER_PAGE * (page - 1));
+      console.log("data from fan", count, allProducts);
       return { count, allProducts };
     }
   } catch (err) {
     console.log("err:", err);
-    throw new Error("Failed to fetch products!");
+    // throw new Error("Failed to fetch products!");
   }
 };

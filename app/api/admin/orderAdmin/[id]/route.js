@@ -7,7 +7,6 @@ export const GET = async (request, { params }) => {
   const { id } = params;
   try {
     await connectDB();
-    // العثور على المدونة بإستخدام رقم التعريف
     const order = await Order.findById(id);
 
     return new NextResponse(JSON.stringify(order), { status: 200 });
@@ -33,12 +32,18 @@ export const DELETE = async (request, { params }) => {
 
 export const PUT = async (request, { params }) => {
   const { id } = params;
-  const { newDataOrder } = await request.json();
+  const dataOrder = await Order.findById(id);
+
+  // const { newDataOrder } = await request.json();
   // update order (update value to isProcess  )
   const newOrder = {
-    client: newDataOrder.newClient,
-    orderProduct: newDataOrder.newOrderProduct,
-    shippingAddress: newDataOrder.newShippingAddress,
+    // client: dataOrder.newClient,
+    userId: dataOrder.userId,
+    userName: dataOrder.userName,
+    email: dataOrder.email,
+
+    orderProduct: dataOrder.orderProduct,
+    shippingAddress: dataOrder.shippingAddress,
     isProcess: false,
   };
 
@@ -47,7 +52,7 @@ export const PUT = async (request, { params }) => {
   const listProduct = newOrder.orderProduct;
 
   // lop to this list and do logic
-  const promises = listProduct.map(async (item) => {
+  const promises = listProduct?.map(async (item) => {
     // get thi id of etch product
     const id = item.productID;
     const product = await Product.findById(id);

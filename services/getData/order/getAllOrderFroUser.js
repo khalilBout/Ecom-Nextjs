@@ -1,13 +1,13 @@
 import Order from "@/models/order";
 import connectDB from "@/utils/connectDB";
 
-export const getAllOrderOfUser = async (email) => {
+export const getAllOrderOfUser = async (idUser) => {
   try {
     connectDB();
     const AllOrders = await Order.find({
-      email: email,
+      userId: idUser,
     });
-    return AllOrders;
+    return { AllOrders };
   } catch (err) {
     console.log("err:", err);
   }

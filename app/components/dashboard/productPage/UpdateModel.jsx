@@ -26,6 +26,7 @@ const UpdateModel = ({
     size,
     selectedColor,
     url,
+    // isChanged,
   };
 
   // delete size
@@ -59,80 +60,70 @@ const UpdateModel = ({
 
   return (
     <>
-      <div className="m-2 p-2 rounded-md bg-blue-50 flex gap-2 flex-col mdl:flex-row justify-between">
-        {/* size and color  and delete btn */}
-        <div className="grow">
-          {/* size box */}
-          <div className="">
-            <div className="flex gap-2">
-              {size?.map((item, i) => (
-                <div
-                  key={i}
-                  className="border border-gray-200 flex items-center justify-around px-2  rounded-lg cursor-pointer"
-                >
-                  <label htmlFor={item._id}>{item.theSize}:</label>
-                  <input
-                    id={item._id}
-                    className=" text-black bg-inherit max-w-[30px] inline-block"
-                    type="text"
-                    name={item.theSize}
-                    onChange={handelUpdateSize}
-                    defaultValue={item.stoke}
-                  />
-                  <button
-                    className="w-[20px] h-[20px] rounded-full flex justify-center items-center hover:bg-red-300 "
-                    onClick={() => deleteSize(item._id)}
+      <div className=" p-2 rounded-md bg-blue-50 flex gap-2 flex-col mdl:flex-row justify-between">
+        {/* size -color and Image*/}
+        <div className=" grow flex gap-2 justify-between flex-col mdl:flex-row">
+          {/* size -color  */}
+          <div className="grow">
+            {/* size box */}
+            <div className="">
+              <div className="flex gap-2">
+                {size?.map((item, i) => (
+                  <div
+                    key={i}
+                    className="border border-gray-200 flex items-center justify-around px-2  rounded-lg cursor-pointer"
                   >
-                    <HiOutlineTrash size={16} />
-                  </button>
-                </div>
-              ))}
-            </div>
-            <div className="my-2 flex flex-col ">
-              <button
-                onClick={() => setAddSize(!addSize)}
-                className={` px-2 py-1 rounded-md w-[100px] ${
-                  addSize
-                    ? "bg-lightText text-primeColor"
-                    : "bg-primeColor text-lightText"
-                }`}
-              >
-                Add Size
-              </button>
+                    <label htmlFor={item._id}>{item.theSize}:</label>
+                    <input
+                      id={item._id}
+                      className=" text-black bg-inherit max-w-[30px] inline-block"
+                      type="text"
+                      name={item.theSize}
+                      onChange={handelUpdateSize}
+                      defaultValue={item.stoke}
+                    />
+                    <button
+                      className="w-[20px] h-[20px] rounded-full flex justify-center items-center hover:bg-red-300 "
+                      onClick={() => deleteSize(item._id)}
+                    >
+                      <HiOutlineTrash size={16} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="my-2 flex flex-col ">
+                <button
+                  onClick={() => setAddSize(!addSize)}
+                  className={` px-2 py-1 rounded-md w-[100px] ${
+                    addSize
+                      ? "bg-lightText text-primeColor"
+                      : "bg-primeColor text-lightText"
+                  }`}
+                >
+                  Add Size
+                </button>
 
-              {addSize && (
-                <SizeProduct
-                  setIsChanged={setIsChanged}
-                  setAddSize={setAddSize}
-                  size={size}
-                  setSize={setSize}
-                  caty={category}
-                />
-              )}
+                {addSize && (
+                  <SizeProduct
+                    setIsChanged={setIsChanged}
+                    setAddSize={setAddSize}
+                    size={size}
+                    setSize={setSize}
+                    caty={category}
+                  />
+                )}
+              </div>
+            </div>
+            {/* Color Box   */}
+            <div className="">
+              <ColorProduct
+                setIsChanged={setIsChanged}
+                selectedColor={selectedColor}
+                setSelectedColor={setSelectedColor}
+              />
             </div>
           </div>
-          {/* Color Box   */}
-          <div className="">
-            <ColorProduct
-              setIsChanged={setIsChanged}
-              selectedColor={selectedColor}
-              setSelectedColor={setSelectedColor}
-            />
-          </div>
-          {/* update btn  */}
-          <div className="w-full mt-2">
-            <button
-              onClick={() => {
-                deleteModel(models._id);
-              }}
-              className="w-full px-2 py-1 rounded-md bg-red-300 cursor-pointer"
-            >
-              Delete Model
-            </button>
-          </div>
-        </div>
-        {/* image and btn update  */}
-        <div className="flex flex-col gap-2">
+
           {/* image box  */}
           <div className="flex justify-start gap-2">
             <div className="flex">
@@ -152,7 +143,6 @@ const UpdateModel = ({
               ))}
             </div>
             {/* add Image  */}
-
             <div
               onClick={() => setIsChanged(true)}
               className=" flex justify-center items-center w-[75px] h-[110px] rounded-md"
@@ -164,6 +154,20 @@ const UpdateModel = ({
                 setPublicId={setPublicId}
               />
             </div>
+          </div>
+        </div>
+        {/* Btn  */}
+        <div className="flex flex-col justify-end gap-2">
+          {/* Delete btn  */}
+          <div className="w-full flex justify-end mt-2">
+            <button
+              onClick={() => {
+                deleteModel(models._id);
+              }}
+              className="w-[140px] px-2 py-1 rounded-md bg-red-300 cursor-pointer"
+            >
+              Delete Model
+            </button>
           </div>
           {/* update btn  */}
           <div className="w-full">

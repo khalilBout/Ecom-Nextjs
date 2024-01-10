@@ -88,75 +88,79 @@ const FormUpdateProduct = ({ data }) => {
     <div>
       {/* info of Product  */}
       <form>
-        <div className="grid lg:grid-cols-2 gap-2 mx-2 ">
-          <input
-            className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
-            placeholder="Name"
-            type="text"
-            name="title"
-            defaultValue={data.title}
-            onChange={handelChange}
-          />
-
-          <input
-            className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
-            placeholder="style"
-            type="text"
-            name="style"
-            defaultValue={data.style}
-            onChange={handelChange}
-          />
-          <input
-            className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
-            placeholder="price"
-            type="number"
-            name="price"
-            defaultValue={data.price}
-            onChange={handelChange}
-          />
-          <input
-            className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
-            placeholder="priceDrop"
-            type="text"
-            name="priceDrop"
-            defaultValue={data.priceDrop}
-            onChange={handelChange}
-          />
-
-          <select
-            className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
-            name="category"
-            defaultValue={data.category}
-            onChange={handelChange}
-            required
-          >
-            <option value="" className="text-gray-300 h-[40px]">
-              category
-            </option>
-            {categoryList?.map((cty) => (
-              <option key={cty} value={cty}>
-                {cty}
+        <div className="gap-1 mx-2 ">
+          <div className="flex">
+            <input
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              placeholder="Name"
+              type="text"
+              name="title"
+              defaultValue={data.title}
+              onChange={handelChange}
+            />
+            <input
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              placeholder="style"
+              type="text"
+              name="style"
+              defaultValue={data.style}
+              onChange={handelChange}
+            />
+          </div>
+          <div className="flex">
+            <input
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              placeholder="price"
+              type="number"
+              name="price"
+              defaultValue={data.price}
+              onChange={handelChange}
+            />
+            <input
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              placeholder="priceDrop"
+              type="text"
+              name="priceDrop"
+              defaultValue={data.priceDrop}
+              onChange={handelChange}
+            />
+          </div>
+          <div className="flex">
+            <select
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              name="category"
+              defaultValue={data.category}
+              onChange={handelChange}
+              required
+            >
+              <option value="" className="text-gray-300 h-[40px]">
+                category
               </option>
-            ))}
-          </select>
-          <select
-            className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
-            name="type"
-            defaultValue={data.type}
-            onChange={handelChange}
-          >
-            <option value="" className="text-gray-300">
-              type
-            </option>
-            {typeList?.map((type) => (
-              <option key={type} value={type}>
-                {type}
+              {categoryList?.map((cty) => (
+                <option key={cty} value={cty}>
+                  {cty}
+                </option>
+              ))}
+            </select>
+            <select
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              name="type"
+              defaultValue={data.type}
+              onChange={handelChange}
+            >
+              <option value="" className="text-gray-300">
+                type
               </option>
-            ))}
-          </select>
+              {typeList?.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <textarea
-            className=" h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1 "
+            className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1 "
             placeholder="desc..."
             type="text"
             name="desc"
@@ -166,19 +170,21 @@ const FormUpdateProduct = ({ data }) => {
         </div>
       </form>
       {/* info of model of product  */}
-      <div className="w-full">
-        <h2 className="text-2xl my-2">Update Info Models</h2>
-        {listModels?.map((item, i) => (
-          <div className="" key={i}>
-            <UpdateModel
-              models={item}
-              category={category}
-              modelChanged={modelChanged}
-              setModelChanged={setModelChanged}
-              deleteModel={deleteModel}
-            />
-          </div>
-        ))}
+      <div className="w-full ">
+        <h2 className="text-2xl my-2 ">Update Info Models</h2>
+        <div className="w-full flex justify-start flex-col gap-2 my-2 ">
+          {listModels?.map((item, i) => (
+            <div className="mx-[40px]" key={i}>
+              <UpdateModel
+                models={item}
+                category={category}
+                modelChanged={modelChanged}
+                setModelChanged={setModelChanged}
+                deleteModel={deleteModel}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Add models  */}
@@ -198,12 +204,12 @@ const FormUpdateProduct = ({ data }) => {
         {/* Btn Add Model   */}
 
         {!addModel && (
-          <div className="flex justify-start">
+          <div className="flex justify-end">
             <button
-              className="w-1/2 px-4 py-2 bg-blue-300 hover:bg-blue-400 cursor-pointer rounded-md"
+              className="w-1/2 px-4 py-2 bg-blue-400 cursor-pointer rounded-md"
               onClick={() => setAddModel(!addModel)}
             >
-              Add Model
+              Add Models
             </button>
           </div>
         )}

@@ -1,6 +1,6 @@
 "use client";
 import { MdOutlineNavigateNext } from "react-icons/md";
-import { GrFormPrevious } from "react-icons/gr";
+import { GrFormPrevious } from "react-icons/Gr";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const PaginationCom = ({ count }) => {
@@ -37,6 +37,14 @@ const PaginationCom = ({ count }) => {
         >
           <GrFormPrevious />
         </button>
+
+        <div
+          className="border-[1px] border-gray-300 text-[#737373] w-8 h-8 text-lg flex items-center justify-center cursor-pointer"
+          disabled
+        >
+          {page}
+        </div>
+
         <button
           className={`${
             hasPrev

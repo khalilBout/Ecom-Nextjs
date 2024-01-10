@@ -150,18 +150,3 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
-{
-  /* <div className="flex justify-end ">
-            <button
-              onClick={handelOrder}
-              className={`${
-                addressClient !== null
-                  ? "bg-primeColor hover:bg-black hover:text-white cursor-pointer"
-                  : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200 cursor-none"
-              } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}
-            >
-              Send Order
-            </button>
-          </div> */
-}

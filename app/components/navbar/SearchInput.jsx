@@ -1,35 +1,20 @@
 "use client";
 import React, { useContext, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
-import { useDebouncedCallback } from "use-debounce";
 import { motion } from "framer-motion";
-import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
+import { FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 import { GlobalContext } from "@/services/context/GlobalContext";
 import ItemCard from "@/app/components/cardPage/ItemCard";
 import Image from "next/image";
 import { emptyCart } from "@/public/images/index";
+import SearchComponent from "@/app/components/navbar/SearchComponent";
 
 const SearchBar = () => {
-  const { cart, isAuthUser, user, setIsAuthUser } = useContext(GlobalContext);
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const { cart, isAuthUser, user } = useContext(GlobalContext);
   const router = useRouter();
-  const pathname = usePathname();
-
-  const handleSearch = useDebouncedCallback((e) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", 1);
-
-    if (e.target.value) {
-      e.target.value.length > 2 && params.set("search", e.target.value);
-    } else {
-      params.delete("search");
-    }
-    replace(`${pathname}?${params}`);
-  }, 300);
 
   const [showCard, setShowCard] = useState(false);
   const [show, setShow] = useState(false);
@@ -84,14 +69,8 @@ const SearchBar = () => {
               )}
             </div>
             {/* search bar */}
-            <div className="relative w-full lg:w-[500px] h-[40px] text-base text-primeColor bg-white flex items-center gap-2 justify-between px-6 rounded-xl">
-              <input
-                className="flex-1 h-full outline-none placeholder:text-[#C4C4C4] placeholder:text-[14px]"
-                type="text"
-                onChange={handleSearch}
-                placeholder="Search your products here"
-              />
-              <FaSearch className="w-5 h-5" />
+            <div>
+              <SearchComponent />
             </div>
             {/* user bar */}
             <div className="flex gap-4 mt-2 lg:mt-0 justify-end items-center pr-6 cursor-pointer relative">

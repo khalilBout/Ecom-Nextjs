@@ -69,23 +69,18 @@ const Orders = ({ data }) => {
               <td className="px-6 py-2">{order?.shippingAddress.phone}</td>
               <td className="px-6 py-2">
                 {order?.isProcess ? (
-                  "Process"
-                ) : (
-                  <h2 className="bg-red-300 px-2 py-1 rounded-md">Dane</h2>
-                )}
-                {order?.isProcess ? (
                   <>
                     <ProcessOrder order={order} />
                   </>
                 ) : (
-                  <></>
+                  <p className="text-[12px]">Completed</p>
                 )}
               </td>
 
               <td className="px-6 py-2">
                 <div>
                   <Link
-                    href={`/dashbord/products//${order._id}`}
+                    href={`/dashbord/products/${order._id}`}
                     className="px-2 py-2 inline-block text-yellow-600 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100 cursor-pointer mr-2"
                   >
                     <GrUpdate size={12} />
