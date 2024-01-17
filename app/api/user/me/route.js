@@ -14,14 +14,11 @@ export async function GET(request) {
       const user = await User.findOne({ _id: decodedToken.id }).select(
         "-password"
       );
-      return NextResponse.json(
-        {
-          status: 200,
-          mesaaage: "User found",
-          data: user,
-        }
-        // { status: 200 }
-      );
+      return NextResponse.json({
+        status: 200,
+        mesaaage: "User found",
+        data: user,
+      });
     } catch (error) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }

@@ -2,8 +2,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { getProviders, signIn, useSession } from "next-auth/react";
 
 const Login = () => {
+  const session = useSession();
+  console.log("session:", session);
+
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -39,31 +43,38 @@ const Login = () => {
     if (email && password) {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/api/user/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
+
+        // const response = await fetch("http://localhost:3000/api/user/login", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     email,
+        //     password,
+        //   }),
+        // });
+
+        signIn("credentials", {
+          email,
+          password,
         });
-        if (response.status === 200) {
-          console.log("user login.");
-          // toast.success("Login success");
-          setEmail("");
-          setPassword("");
-          router.refresh();
-        }
-        if (response.status === 400) {
-          setErrorMsg("user dos't exist.");
-          // toast.success("Login success");
-          // router.refresh();
-          setErrorMsg("user dos't exist.");
-          setEmail("");
-          setPassword("");
-        }
+
+        // if (response.status === 200) {
+        //   console.log("user login.");
+        //   // toast.success("Login success");
+        //   setEmail("");
+        //   setPassword("");
+        //   router.refresh();
+        // }
+        // if (response.status === 400) {
+        //   setErrorMsg("user dos't exist.");
+        //   // toast.success("Login success");
+        //   // router.refresh();
+        //   setErrorMsg("user dos't exist.");
+        //   setEmail("");
+        //   setPassword("");
+        // }
       } catch (error) {
         console.log("Login failed", error);
         setErrorMsg("Error Login:", error);
@@ -142,6 +153,19 @@ const Login = () => {
                 </span>
               </Link>
             </p>
+            <button
+              className="bg-green-200 text-gray-500  px-4 py-2 text-xl hover:bg-green-400 cursor-pointer"
+              // trigger function of sign in (from next-auth) with credentials (in this case get user from google )
+              // onClick={() => signIn("google")}
+              onClick={(e) => {
+                e.preventDefault();
+                signIn("google", {
+                  callbackUrl: "/",
+                });
+              }}
+            >
+              Login with Google
+            </button>
           </div>
         </div>
       </form>

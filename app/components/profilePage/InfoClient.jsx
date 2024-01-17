@@ -1,20 +1,20 @@
 "use client";
 import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "@/services/context/GlobalContext";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+// import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const InfoClient = () => {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const { replace } = useRouter();
   const { cart, clearCart, user } = useContext(GlobalContext);
-  const userEmail = user?.email;
+  // const userId = user?.id;
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    params.set("em", userEmail);
-    replace(`${pathname}?${params}`);
-  }, [userEmail]);
+  // useEffect(() => {
+  //   const params = new URLSearchParams(searchParams);
+  //   params.set("id", userId);
+  //   replace(`${pathname}?${params}`);
+  // }, [userId]);
 
   return (
     <div>

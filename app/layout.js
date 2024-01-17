@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/app/components/navbar/Navbar";
 import GlobalState from "@/services/context/GlobalContext";
 import Footer from "@/app/components/footer/Footer";
+import AuthProvider from "@/app/components/AuthProvider/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,11 +18,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GlobalState>
-          <Navbar />
-          {children}
-          <Footer />
-        </GlobalState>
+        <AuthProvider>
+          <GlobalState>
+            <Navbar />
+            {children}
+            <Footer />
+          </GlobalState>
+        </AuthProvider>
       </body>
     </html>
   );

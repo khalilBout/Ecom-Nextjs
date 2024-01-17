@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 const Register = () => {
   const router = useRouter();
   // ============= Initial State Start here =============
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
   const user = {
-    username,
+    name,
     email,
     password,
   };
@@ -24,7 +24,7 @@ const Register = () => {
 
   // ============= Event Handler Start here =============
   const handleName = (e) => {
-    setUsername(e.target.value);
+    setName(e.target.value);
     setErrUsername("");
   };
   const handleEmail = (e) => {
@@ -48,7 +48,7 @@ const Register = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     if (checked) {
-      if (!username) {
+      if (!name) {
         setErrUsername("Enter your name");
       }
       if (!email) {
@@ -68,7 +68,7 @@ const Register = () => {
 
       // ============== Getting the value ==============
       if (
-        username &&
+        name &&
         email &&
         EmailValidation(email) &&
         password &&
@@ -78,27 +78,36 @@ const Register = () => {
           // setLoading(true);
           // const response =fet("/api/user/register", user);
 
-          const response = await fetch(
-            "http://localhost:3000/api/user/register",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(user),
-            }
-          );
+          // const response = await fetch(
+          //   // "http://localhost:3000/api/user/register",
+          //   "/api/auth/register",
+          //   {
+          //     method: "POST",
+          //     headers: {
+          //       "Content-Type": "application/json",
+          //     },
+          //     body: JSON.stringify(user),
+          //   }
+          // );
+
+          const response = await fetch("/api/auth/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+          });
           console.log("response:", response);
           if (response.status === 400) {
             console.log("email exist..");
-            setUsername("");
+            setName("");
             setEmail("");
             setPassword("");
             router.refresh();
             setErrorMsg("email exist..");
           }
           if (response.status === 201) {
-            setUsername("");
+            setName("");
             setEmail("");
             setPassword("");
             router.push("/account/login");
@@ -124,7 +133,7 @@ const Register = () => {
               </p>
               <input
                 onChange={handleName}
-                value={username}
+                value={name}
                 className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                 type="text"
                 placeholder="eg. John Doe"

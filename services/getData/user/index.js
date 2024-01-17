@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 
 // fitch user from him
 // mast be login and send token
+// mast call this function from client component because Cookies
 export async function getUser() {
   try {
     const res = await fetch("http://localhost:3000/api/user/me", {
