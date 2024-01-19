@@ -147,7 +147,7 @@ const Login = () => {
             )}
             <p className="text-sm text-center font-titleFont font-medium">
               Don't have an Account !{" "}
-              <Link href="/account/register">
+              <Link href="/register">
                 <span className="hover:text-blue-600 duration-300">
                   Register
                 </span>

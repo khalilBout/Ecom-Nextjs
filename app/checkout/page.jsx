@@ -97,7 +97,7 @@ const Checkout = () => {
                   <>
                     <h2 className="text-[20px]">you are not login </h2>
                     <Link
-                      href="/account/login"
+                      href="/login"
                       className="bg-green-200 px-3 py-1 rounded-lg cursor-pointer hover:bg-slate-400"
                     >
                       Login

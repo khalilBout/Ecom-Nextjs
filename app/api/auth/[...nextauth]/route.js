@@ -13,7 +13,7 @@ const handler = NextAuth({
     CredentialsProvider({
       id: "credentials",
       name: "Credentials",
-
+      // الدالة المسؤولة عن التاكد من البايانات ثم تسجيل الدخول
       async authorize(credentials) {
         //Check if the user exists.
         await connectDB();
@@ -31,6 +31,7 @@ const handler = NextAuth({
             );
 
             if (isPasswordCorrect) {
+              delete user.password;
               return user;
             } else {
               throw new Error("Wrong Credentials!");
@@ -45,20 +46,36 @@ const handler = NextAuth({
     }),
 
     GoogleProvider({
+      // إستخراج البيانات من بروفايل الغوغل والتعديل عليعا بإضافة  دور المستخدم
+      // وكذا رقم تعريفي لكون بوفايل الغوغل لا يحتوي على رقم  تعريفي
+      profile(profile) {
+        let roleUser = "user";
+        return {
+          ...profile,
+          id: profile.sub,
+          role: roleUser,
+        };
+      },
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  //   callbacks: {
-  //     async jwt({ token, user }) {
-  //       if (user) token.role = user.role;
-  //       return token;
-  //     },
-  //     async session({ session, token }) {
-  //       if (session?.user) session.user.role = token.role;
-  //       return session;
-  //     },
-  //   },
+  //  الدالة المسؤولة على التغير في البايانات الراجعة  او المستردة والت يمكن الوصول إاليها في التطبيق
+  callbacks: {
+    // إضافة دور المستخدم في جانب السرفر
+    async jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
+    },
+    //  إضافة دور المستخدم في جانب الكلاينت
+    async session({ session, token }) {
+      if (session?.user) session.user.role = token.role;
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/login",
+  },
 });
 
 export { handler as GET, handler as POST };

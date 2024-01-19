@@ -6,47 +6,30 @@ import { FaUser, FaCaretDown } from "react-icons/fa";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+// import { emptyCart } from "@/public/images/index";
 
 const userData = () => {
   const router = useRouter();
   const [showUser, setShowUser] = useState(false);
 
-  //   const [isAuthUser, setIsAuthUser] = useState(false);
   const session = useSession();
-
-  console.log("session:", session);
-  //   console.log("user:", user);
-  const logout = async () => {
-    try {
-      const res = await fetch("http://localhost:3000/api/user/logout", {
-        method: "GET",
-      });
-      const ruselt = await res.json();
-      console.log("ruselt", ruselt);
-      // toast.success("Logout successful");
-      if (ruselt.success) {
-        router.refresh();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    // await axios.get("/api/user/logout");
-  };
+  // console.log("session:", session);
   return (
     <>
       <div className="relative">
-        <div onClick={() => setShowUser(!showUser)} className="flex">
+        <div onClick={() => setShowUser(!showUser)} className="flex items-end">
           {session && session.status === "authenticated" && (
-            <div className=" p-2 w-[35px] h-[35px] rounded-full bg-green-100 border border-gray-300  flex justify-start items-center ">
-              <Image
-                width={20}
-                height={20}
+            <div className="rounded-full bg-green-100 border border-gray-300  flex justify-start items-center ">
+              {/* <Image
+                width={35}
+                height={35}
                 className="rounded-full"
-                //   src={session?.data.user.image}
-                //   alt={session?.data.user.name}
-                src=""
-                alt=""
-              />
+                src={session?.data.user.image || emptyCart}
+                alt={session?.data.user.name}
+              /> */}
+              <p className="text-gray-700 bg-gray-200 rounded-md px-2 py-1 bg">
+                {session?.data.user.name}
+              </p>
             </div>
           )}
           {session && session.status === "unauthenticated" && (
@@ -77,15 +60,12 @@ const userData = () => {
               </>
             ) : (
               <>
-                <Link href="/account/login" onClick={() => setShowUser(false)}>
+                <Link href="/login" onClick={() => setShowUser(false)}>
                   <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Login
                   </li>
                 </Link>
-                <Link
-                  onClick={() => setShowUser(false)}
-                  href="/account/register"
-                >
+                <Link onClick={() => setShowUser(false)} href="/register">
                   <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Sign Up
                   </li>

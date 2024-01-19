@@ -110,7 +110,7 @@ const Register = () => {
             setName("");
             setEmail("");
             setPassword("");
-            router.push("/account/login");
+            router.push("/login");
           }
         } catch (error) {
           console.log("Signup failed", error.message);
@@ -215,7 +215,7 @@ const Register = () => {
             )}
             <p className="text-sm text-center font-titleFont font-medium">
               I have an Account{" "}
-              <Link href="/account/login">
+              <Link href="/login">
                 <span className="hover:text-blue-600 duration-300">
                   Sign in
                 </span>

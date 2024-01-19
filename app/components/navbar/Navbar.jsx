@@ -1,18 +1,43 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { navBarList } from "@/utils/constants";
 import Link from "next/link";
 // component
-import SearchInput from "@/app/components/navbar/SearchInput";
+import SearchNav from "@/app/components/navbar/SearchNav";
 
 // images
 
 // icons
 import { MdClose } from "react-icons/md";
 import { HiMenuAlt2 } from "react-icons/hi";
+import { useSession } from "next-auth/react";
 
+const navBarList = [
+  {
+    _id: 1001,
+    title: "Home",
+    link: "/",
+  },
+  {
+    _id: 1002,
+    title: "Shop",
+    link: "/shop",
+  },
+  {
+    _id: 1003,
+    title: "About",
+    link: "/about",
+  },
+  {
+    _id: 1005,
+    title: "Offer",
+    link: "/offer",
+  },
+];
 const Navbar = () => {
+  const session = useSession();
+  console.log("session from nav:", session);
+
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
   const [category, setCategory] = useState(false);
@@ -59,6 +84,24 @@ const Navbar = () => {
                         <li>{item.title}</li>
                       </Link>
                     ))}
+                    {session?.status === "authenticated" &&
+                    session?.data.user.role === "admin" ? (
+                      <Link
+                        key="dashboard"
+                        className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0 bg-red-200 rounded-md"
+                        href="/dashboard"
+                      >
+                        <li>Dashboard</li>
+                      </Link>
+                    ) : (
+                      <Link
+                        key="contact"
+                        className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                        href="/contact"
+                      >
+                        <li>Contact</li>
+                      </Link>
+                    )}
                   </>
                 </motion.ul>
               )}
@@ -153,7 +196,7 @@ const Navbar = () => {
           </div>
         </nav>
       </div>
-      <SearchInput />
+      <SearchNav />
     </>
   );
 };
