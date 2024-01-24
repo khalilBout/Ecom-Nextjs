@@ -47,7 +47,9 @@ const TableOrder = ({ allOrder }) => {
                 {order?.orderProduct?.map((ProductItem, index) => (
                   <div key={index} className="flex gap-2 my-1">
                     <Image
-                      src={ProductItem.url || orderImg}
+                      width={8}
+                      height={10}
+                      src={ProductItem.imageModel || orderImg}
                       alt={ProductItem.productTitle}
                       className="w-8 h-10 rounded object-cover block"
                     />
@@ -102,7 +104,7 @@ const TableOrder = ({ allOrder }) => {
                     </span>
                   )}
                   {/* /admin/order/${order._id} */}
-                  <BtnDelete url={`/admin/order/${order._id}`} />
+                  <BtnDelete url={`/admin/orderAdmin/${order._id}`} />
                 </div>
               </td>
             </tr>

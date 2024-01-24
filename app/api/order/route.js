@@ -6,7 +6,7 @@ import Product from "@/models/product";
 export const POST = async (request) => {
   const body = await request.json();
 
-  const { userId, userName, email, shippingAddress, orderItems } = body;
+  const { userName, email, shippingAddress, orderItems } = body;
   const promises = orderItems.map(async (item) => {
     const productOrder = await Product.findById(item.productID);
     const productID = productOrder._id;
@@ -17,6 +17,7 @@ export const POST = async (request) => {
 
     const quantity = item.Qt;
     const Color = item.Color;
+    const imageModel = item.imageModel;
     const sizeSelect = item.sizeSelect;
     const idModel = item.idModel;
 
@@ -29,6 +30,7 @@ export const POST = async (request) => {
       finalPrice,
       priceDrop,
       Color,
+      imageModel,
       sizeSelect,
       quantity,
       PriceAfterDesc,
@@ -43,7 +45,6 @@ export const POST = async (request) => {
     shippingCharge
   );
   const dataOrder = {
-    userId,
     userName,
     email,
     shippingAddress,

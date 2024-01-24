@@ -4,11 +4,6 @@ import User from "./user";
 import Profile from "./profile";
 
 const OrderSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: [false],
-  },
   userName: {
     type: String,
     required: [false],
@@ -53,6 +48,10 @@ const OrderSchema = new mongoose.Schema({
       productTitle: {
         type: String,
         required: [true],
+      },
+      imageModel: {
+        type: String,
+        required: [false],
       },
       idModel: {
         type: String,

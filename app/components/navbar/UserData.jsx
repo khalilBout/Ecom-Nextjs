@@ -19,17 +19,17 @@ const userData = () => {
       <div className="relative">
         <div onClick={() => setShowUser(!showUser)} className="flex items-end">
           {session && session.status === "authenticated" && (
-            <div className="rounded-full bg-green-100 border border-gray-300  flex justify-start items-center ">
-              {/* <Image
+            <div className="flex justify-start items-center ">
+              <p className="text-gray-600 text-[14px] px-2 py-1 bg">
+                {session?.data.user.name}
+              </p>
+              <Image
                 width={35}
                 height={35}
                 className="rounded-full"
                 src={session?.data.user.image || emptyCart}
                 alt={session?.data.user.name}
-              /> */}
-              <p className="text-gray-700 bg-gray-200 rounded-md px-2 py-1 bg">
-                {session?.data.user.name}
-              </p>
+              />
             </div>
           )}
           {session && session.status === "unauthenticated" && (

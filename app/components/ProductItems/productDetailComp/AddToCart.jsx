@@ -1,13 +1,15 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
-import { GlobalContext } from "@/services/context/GlobalContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBasket } from "@/redux/CartSlice";
+import toast from "react-hot-toast";
 
 const AddToCart = ({ product }) => {
-  const { addItemToCart, showCartModal, setShowCartModal } =
-    useContext(GlobalContext);
+  const cart = useSelector((state) => state.Cart.cartProducts);
+  const dispatch = useDispatch();
 
   const idProduct = product._id;
   const [Qt, setQt] = useState(1);
@@ -27,6 +29,7 @@ const AddToCart = ({ product }) => {
   const imageModel = currentModel?.url[0];
   const listSizeCurrent = currentModel?.size;
   const finalPrice = product?.finalPrice;
+
   // handel qt
   const decrement = (prev) => {
     Qt > 1 ? setQt(Qt - 1) : setQt(1);
@@ -40,6 +43,7 @@ const AddToCart = ({ product }) => {
     }
     setQt(Qt + 1);
   };
+
   const itemToCart = {
     titleProduct,
     idProduct,
@@ -52,13 +56,27 @@ const AddToCart = ({ product }) => {
     sizeSelectStoke,
     imageModel,
   };
-  const handleCart = () => {
+
+  const handleAddToCart = () => {
     if (Color === "" || sizeSelect === "") {
       return alert("plase select color and size of product ");
+    }
+    if (cart.length > 0) {
+      const itemExist = cart.find(
+        (item) =>
+          item.idProduct === itemToCart.idProduct &&
+          item.Color === itemToCart.Color &&
+          item.sizeSelect === itemToCart.sizeSelect
+      );
+      if (itemExist) {
+        toast.error("item Exist ...");
+      } else {
+        dispatch(addToBasket(itemToCart));
+        toast.success("Successfully Product add..");
+      }
     } else {
-      console.log("send item To Cart:", itemToCart);
-      addItemToCart({ itemToCart });
-      setShowCartModal(!showCartModal);
+      dispatch(addToBasket(itemToCart));
+      toast.success("Successfully Product add..");
     }
   };
 
@@ -102,7 +120,6 @@ const AddToCart = ({ product }) => {
         <>
           <div className="flex space-x-5 mb-2">
             {listSizeCurrent?.map((size, index) => (
-              // <Link href={{ pathname: "/", query: { color: "ok" } }}>
               <Link
                 key={index}
                 href={{
@@ -124,8 +141,6 @@ const AddToCart = ({ product }) => {
               >
                 {size.theSize}
               </Link>
-
-              // </Link>
             ))}
           </div>
           <div>
@@ -165,7 +180,7 @@ const AddToCart = ({ product }) => {
       <div className="flex items-center mt-7 space-x-10">
         {/* <AddCart productId={id}/> */}
         <div
-          onClick={handleCart}
+          onClick={handleAddToCart}
           className="w-full py-4 bg-primeColor hover:bg-black duration-300 text-white text-lg font-titleFont flex justify-center items-center cursor-pointer"
         >
           <span className="mx-4">

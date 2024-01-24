@@ -6,6 +6,8 @@ import Navbar from "@/app/components/navbar/Navbar";
 import GlobalState from "@/services/context/GlobalContext";
 import Footer from "@/app/components/footer/Footer";
 import AuthProvider from "@/app/components/AuthProvider/AuthProvider";
+import ReduxProv from "@/app/components/ReduxProv";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +21,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <GlobalState>
-            <Navbar />
-            {children}
-            <Footer />
-          </GlobalState>
+          <ReduxProv>
+            <GlobalState>
+              <Navbar />
+              {children}
+              <Toaster position="bottom-right" />
+              <Footer />
+            </GlobalState>
+          </ReduxProv>
         </AuthProvider>
       </body>
     </html>

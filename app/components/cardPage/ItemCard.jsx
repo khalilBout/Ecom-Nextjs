@@ -1,24 +1,16 @@
 "use client";
 import Image from "next/image";
-import React, { useContext } from "react";
-import { GlobalContext } from "@/services/context/GlobalContext";
 import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
-import { ImCross } from "react-icons/im";
 import noImg from "@/public/empty.png";
 import Link from "next/link";
+import { removeItem, increaseCount, decreaseCount } from "@/redux/CartSlice";
+import { useDispatch } from "react-redux";
 
 const ItemCard = ({ item }) => {
-  const {
-    isAuthUser,
-    setIsAuthUser,
-    cart,
-    incQttOfProduct,
-    decQttOfProduct,
-    deleteItemFromCart,
-    clearCart,
-  } = useContext(GlobalContext);
+  const dispatch = useDispatch();
   const {
     idProduct,
+    idModel,
     titleProduct,
     imageModel,
     Qt,
@@ -27,12 +19,13 @@ const ItemCard = ({ item }) => {
     Color,
     sizeSelectStoke,
   } = item;
+
   return (
     <div className="flex border-b border-gray-200 w-full font-light text-gray-500 ">
       <div className="w-full min-h-[150px] flex items-center gap-x-4">
         <Link href={`/shop/${item.idProduct}`}>
           <img
-            className="max-w-[80px]  "
+            className="max-w-[80px]"
             src={imageModel || noImg}
             alt={titleProduct}
           />
@@ -48,7 +41,9 @@ const ItemCard = ({ item }) => {
             <div className="text-xl cursor-pointer">
               <IoMdClose
                 className="text-gray-500 hover:text-red-500 transition"
-                onClick={() => deleteItemFromCart(idProduct, Color, sizeSelect)}
+                onClick={() =>
+                  dispatch(removeItem({ idProduct, idModel, sizeSelect }))
+                }
               />
             </div>
           </div>
@@ -76,12 +71,7 @@ const ItemCard = ({ item }) => {
                 <IoMdRemove
                   className="hover:text-red-500 transition"
                   onClick={() =>
-                    decQttOfProduct(
-                      idProduct,
-                      Color,
-                      sizeSelect,
-                      sizeSelectStoke
-                    )
+                    dispatch(decreaseCount({ idProduct, idModel, sizeSelect }))
                   }
                 />
               </div>
@@ -92,12 +82,7 @@ const ItemCard = ({ item }) => {
                 <IoMdAdd
                   className="hover:text-red-500 transition"
                   onClick={() =>
-                    incQttOfProduct(
-                      idProduct,
-                      Color,
-                      sizeSelect,
-                      sizeSelectStoke
-                    )
+                    dispatch(increaseCount({ idProduct, idModel, sizeSelect }))
                   }
                 />
               </div>

@@ -1,13 +1,14 @@
 "use client";
 import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "@/services/context/GlobalContext";
+import Image from "next/image";
 // import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const InfoClient = () => {
+const InfoClient = ({ user }) => {
   // const searchParams = useSearchParams();
   // const pathname = usePathname();
   // const { replace } = useRouter();
-  const { cart, clearCart, user } = useContext(GlobalContext);
+  const { cart, clearCart } = useContext(GlobalContext);
   // const userId = user?.id;
 
   // useEffect(() => {
@@ -19,11 +20,18 @@ const InfoClient = () => {
   return (
     <div>
       <h1>
-        Name:<span className="text-red-400">{user?.username}</span>
+        Name:<span className="text-red-400">{user?.name}</span>
       </h1>
       <h1>
-        Name:<span className="text-red-400">{user?.email}</span>
+        Email:<span className="text-red-400">{user?.email}</span>
       </h1>
+      <Image
+        width={90}
+        height={90}
+        src={user?.image}
+        alt={user?.name}
+        className="w-[90px] h-[90px] rounded-full bg-green-100 "
+      />
       <div className="">
         <h2>My Product Card </h2>
         {cart?.cartItems && cart.cartItems.length > 0 ? (

@@ -5,8 +5,7 @@ import { getServerSession } from "next-auth";
 // import { redirect } from "next/navigation";
 
 const page = async () => {
-  const session = await getServerSession();
-  const email = session?.user.email;
+  const { user } = await getServerSession();
 
   // if client component use useSession
   //   const { data: session } = useSession({
@@ -16,10 +15,10 @@ const page = async () => {
   //   },
   // });
 
-  const { AllOrders } = await getAllOrderOfUser(email);
+  const { AllOrders } = await getAllOrderOfUser(user.email);
   return (
     <div>
-      <InfoClient />
+      <InfoClient user={user} />
       <OrderClient AllOrders={AllOrders} />
     </div>
   );

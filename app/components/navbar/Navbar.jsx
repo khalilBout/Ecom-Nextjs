@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+
 // component
 import SearchNav from "@/app/components/navbar/SearchNav";
 
@@ -36,7 +37,6 @@ const navBarList = [
 ];
 const Navbar = () => {
   const session = useSession();
-  console.log("session from nav:", session);
 
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
@@ -79,7 +79,6 @@ const Navbar = () => {
                         key={item._id}
                         className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
                         href={item.link}
-                        // state={{ data: location.pathname.split("/")[1] }}
                       >
                         <li>{item.title}</li>
                       </Link>

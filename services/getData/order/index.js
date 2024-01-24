@@ -33,7 +33,6 @@ export const getOrderById = async (id) => {
     console.log(e);
   }
 };
-
 // Serves to Admin uniq
 export const getAllOrders = async () => {
   try {

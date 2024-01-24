@@ -59,7 +59,7 @@ const Product = ({ product }) => {
             </>
           )}
         </div>
-        <div className="absolute top-6 left-8">
+        <div className=" absolute top-6 left-8">
           {globalStoke === 0 ? (
             <>
               <div className="bg-red-400 w-[92px] h-[35px] text-white flex justify-center items-center text-base font-semibold hover:bg-black duration-300 cursor-pointer">
@@ -67,8 +67,8 @@ const Product = ({ product }) => {
               </div>
             </>
           ) : (
-            <div className="bg-primeColor w-[92px] h-[35px] text-white flex justify-center items-center text-base font-semibold hover:bg-black duration-300 cursor-pointer">
-              {product.type}
+            <div className="bg-gray-50 rounded-md w-[92px] h-[35px] text-primeColor flex justify-center items-center text-base font-semibold hover:bg-black duration-300 cursor-pointer">
+              {product.style}
             </div>
           )}
         </div>

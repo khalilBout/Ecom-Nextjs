@@ -9,16 +9,25 @@ import TotalsCart from "../components/checkoutPage/TotalsCart";
 import Address from "../components/checkoutPage/Address";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetBasket } from "@/redux/CartSlice";
+import toast from "react-hot-toast";
 
 const Checkout = () => {
-  const { cart, clearCart, user } = useContext(GlobalContext);
+  const session = useSession();
+  const cart = useSelector((state) => state.Cart.cartProducts);
+  const dispatch = useDispatch();
+
+  // const { cart, clearCart} = useContext(GlobalContext);
   const router = useRouter();
   const [addressClient, setAddressClient] = useState(null);
 
   const OrderData = {
-    userId: user?.id || null,
-    userName: user?.username || null,
-    email: user?.email || null,
+    // userId: user?.id || null,
+    userName: session?.data?.user.name || null,
+    email: session?.data?.user.email || null,
+
     shippingAddress: {
       clientName: addressClient?.clientName,
       address: addressClient?.address,
@@ -26,12 +35,13 @@ const Checkout = () => {
       phone: addressClient?.phone,
       willai: addressClient?.willai,
     },
-    orderItems: cart?.cartItems?.map((item) => ({
+    orderItems: cart?.map((item) => ({
       productID: item.idProduct,
       titleProduct: item.titleProduct,
       idModel: item.idModel,
       Qt: item.Qt,
       Color: item.Color,
+      imageModel: item.imageModel,
       sizeSelect: item.sizeSelect,
     })),
   };
@@ -48,21 +58,23 @@ const Checkout = () => {
 
       if (response.status === 201) {
         clearCart();
+        toast.success("add your Order ..");
         router.push("/");
       }
     } catch (e) {
       console.log(e);
+      toast.error(e, "no product sending ...");
     }
   };
 
   return (
     <div className="max-w-container mx-auto px-4">
-      {cart?.cartItems && cart.cartItems.length > 0 ? (
+      {cart?.length > 0 ? (
         <>
           <div className="mdl:flex gap-4">
             <div className="w-full mdl:w-1/2 pb-20 ">
               <div className="mt-5">
-                {cart?.cartItems.map((item) => (
+                {cart?.map((item) => (
                   <div className="" key={item.titleProduct}>
                     <div className="sml:hidden">
                       <ItemCard item={item} />
@@ -74,7 +86,11 @@ const Checkout = () => {
                 ))}
               </div>
               <button
-                onClick={clearCart}
+                // onClick={clearCart}
+                onClick={() => {
+                  dispatch(resetBasket());
+                  toast.success("your cart is empty ..");
+                }}
                 className="py-2 px-10 bg-red-500 text-white font-semibold uppercase mb-4 hover:bg-red-700 duration-300"
               >
                 Reset cart
@@ -87,13 +103,19 @@ const Checkout = () => {
             {/* Info Address  */}
             <div className="w-full mdl:w-1/2 mt-4">
               <div className="">
-                {user ? (
+                {session.status === "loading" && <p>loading...</p>}
+                {session.status === "authenticated" && (
                   <>
                     <p className="text-[22px] font-bold ">
-                      Hi <span className="text-[red]"> {user.username} </span>
+                      Hi{" "}
+                      <span className="text-[red]">
+                        {" "}
+                        {session?.data?.user.name}{" "}
+                      </span>
                     </p>
                   </>
-                ) : (
+                )}
+                {session.status === "unauthenticated" && (
                   <>
                     <h2 className="text-[20px]">you are not login </h2>
                     <Link
@@ -105,7 +127,6 @@ const Checkout = () => {
                   </>
                 )}
               </div>
-
               {addressClient === null ? (
                 <>
                   <Address setAddressClient={setAddressClient} />

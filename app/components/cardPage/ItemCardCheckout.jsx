@@ -1,21 +1,25 @@
 "use client";
 import Image from "next/image";
-import React, { useContext } from "react";
-import { GlobalContext } from "@/services/context/GlobalContext";
-
+import React from "react";
 import { ImCross } from "react-icons/im";
 import noImg from "@/public/empty.png";
+import { removeItem, increaseCount, decreaseCount } from "@/redux/CartSlice";
+import { useDispatch } from "react-redux";
 
 const ItemCardCheckout = ({ item }) => {
+  const dispatch = useDispatch();
   const {
-    isAuthUser,
-    setIsAuthUser,
-    cart,
-    incQttOfProduct,
-    decQttOfProduct,
-    deleteItemFromCart,
-    clearCart,
-  } = useContext(GlobalContext);
+    idProduct,
+    idModel,
+    titleProduct,
+    imageModel,
+    Qt,
+    finalPrice,
+    sizeSelect,
+    Color,
+    price,
+    sizeSelectStoke,
+  } = item;
 
   return (
     <div
@@ -25,7 +29,7 @@ const ItemCardCheckout = ({ item }) => {
       {/* image box  */}
       <div className="flex-shrink-0 overflow-hidden rounded-md ">
         <Image
-          src={item.imageModel || noImg}
+          src={imageModel || noImg}
           width={110}
           height={160}
           alt={item.titleProduct}
@@ -37,20 +41,20 @@ const ItemCardCheckout = ({ item }) => {
       <div className="mx-2 w-full flex gap-2 ">
         <div className="w-1/2 flex flex-col justify-between ">
           <h2 className="my-2 text-[20px] mdl:text-[26px] font-bold text-gray-900">
-            <a>{item.titleProduct}</a>
+            <a>{titleProduct}</a>
           </h2>
           <div className="">
             <div className="flex my-1">
               <p
                 className={`mr-3 font-bold text-black text-[18px] mdl:text-[22px] ${
-                  item.finalPrice > 0 ? "line-through" : ""
+                  finalPrice > 0 ? "line-through" : ""
                 }`}
               >
-                ${item.price}
+                ${price}
               </p>
               {item.finalPrice && (
                 <p className="text-md font-bold text-red-600 text-[18px] mdl:text-[22px]">
-                  ${item.finalPrice}
+                  ${finalPrice}
                 </p>
               )}
             </div>
@@ -59,12 +63,7 @@ const ItemCardCheckout = ({ item }) => {
             <div className="w-[90px] flex flex-row ">
               <button
                 onClick={() =>
-                  decQttOfProduct(
-                    item.idProduct,
-                    item.Color,
-                    item.sizeSelect,
-                    item.sizeSelectStoke
-                  )
+                  dispatch(decreaseCount({ idProduct, idModel, sizeSelect }))
                 }
                 data-action="decrement"
                 className=" bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
@@ -76,18 +75,13 @@ const ItemCardCheckout = ({ item }) => {
                 // type="number"
                 className=" focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  mdl:text-basecursor-default flex items-center text-gray-900  outline-none custom-input-number"
                 name="custom-input-number"
-                value={item.Qt}
+                value={Qt}
                 readOnly
               ></input>
 
               <button
                 onClick={() =>
-                  incQttOfProduct(
-                    item.idProduct,
-                    item.Color,
-                    item.sizeSelect,
-                    item.sizeSelectStoke
-                  )
+                  dispatch(increaseCount({ idProduct, idModel, sizeSelect }))
                 }
                 data-action="increment"
                 className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
@@ -105,7 +99,7 @@ const ItemCardCheckout = ({ item }) => {
             <h2 className="text-[16px] font-bold mdl:text-[20] ">Color: </h2>
             <div
               className="w-[20px] h-[20px] mdl:w-[35px] mdl:h-[35px] border-2 rounded-full mx-2 "
-              style={{ backgroundColor: item.Color }}
+              style={{ backgroundColor: Color }}
             ></div>
           </div>
           {/* size */}
@@ -113,7 +107,7 @@ const ItemCardCheckout = ({ item }) => {
             <h2 className="">
               size:
               <span className="px-2 mx-1 rounded-md bg-slate-200">
-                {item.sizeSelect}
+                {sizeSelect}
               </span>
             </h2>
             {/* <h2 className="">Qt:{item.Qt}</h2> */}
@@ -121,10 +115,10 @@ const ItemCardCheckout = ({ item }) => {
           <div className="flex">
             <p className="text-[16px] font-bold mdl:text-[20] mr-2">Total:</p>
             <p>
-              {item.finalPrice && item.finalPrice > 0 ? (
-                <> {item.finalPrice * item.Qt}</>
+              {finalPrice && finalPrice > 0 ? (
+                <> {finalPrice * Qt}</>
               ) : (
-                <>{item.price * item.Qt}</>
+                <>{price * Qt}</>
               )}
             </p>
           </div>
@@ -133,9 +127,7 @@ const ItemCardCheckout = ({ item }) => {
       <button
         type="button"
         className="absolute top-4 right-4 font-medium px-1 rounded-md cursor-pointer"
-        onClick={() =>
-          deleteItemFromCart(item.idProduct, item.Color, item.sizeSelect)
-        }
+        onClick={() => dispatch(removeItem({ idProduct, idModel, sizeSelect }))}
       >
         <ImCross className="text-primeColor  hover:text-red-500 duration-300 cursor-pointer" />
       </button>

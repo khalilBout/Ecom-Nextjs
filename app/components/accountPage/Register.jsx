@@ -75,21 +75,6 @@ const Register = () => {
         password.length >= 6
       ) {
         try {
-          // setLoading(true);
-          // const response =fet("/api/user/register", user);
-
-          // const response = await fetch(
-          //   // "http://localhost:3000/api/user/register",
-          //   "/api/auth/register",
-          //   {
-          //     method: "POST",
-          //     headers: {
-          //       "Content-Type": "application/json",
-          //     },
-          //     body: JSON.stringify(user),
-          //   }
-          // );
-
           const response = await fetch("/api/auth/register", {
             method: "POST",
             headers: {

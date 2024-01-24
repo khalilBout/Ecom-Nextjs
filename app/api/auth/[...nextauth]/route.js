@@ -50,10 +50,12 @@ const handler = NextAuth({
       // وكذا رقم تعريفي لكون بوفايل الغوغل لا يحتوي على رقم  تعريفي
       profile(profile) {
         let roleUser = "user";
+        // إستخراج معلومات من ملف البروفايل الخاص بغوغل
         return {
           ...profile,
           id: profile.sub,
           role: roleUser,
+          image: profile.picture,
         };
       },
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -62,14 +64,22 @@ const handler = NextAuth({
   ],
   //  الدالة المسؤولة على التغير في البايانات الراجعة  او المستردة والت يمكن الوصول إاليها في التطبيق
   callbacks: {
-    // إضافة دور المستخدم في جانب السرفر
+    // إضافة دور المستخدم والصورة في جانب السرفر
     async jwt({ token, user }) {
-      if (user) token.role = user.role;
+      if (user) {
+        token.role = user.role;
+        token.image = user.image;
+        return token;
+      }
       return token;
     },
-    //  إضافة دور المستخدم في جانب الكلاينت
+    //  إضافة دور المستخدم وصورته في جانب الكلاينت
     async session({ session, token }) {
-      if (session?.user) session.user.role = token.role;
+      if (session?.user) {
+        session.user.role = token.role;
+        session.user.image = token.image;
+        return session;
+      }
       return session;
     },
   },

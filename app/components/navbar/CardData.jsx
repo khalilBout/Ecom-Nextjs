@@ -1,26 +1,23 @@
 "use client";
-import React, { useContext, useState } from "react";
-
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
-import { GlobalContext } from "@/services/context/GlobalContext";
 import ItemCard from "@/app/components/cardPage/ItemCard";
 import Image from "next/image";
 import { emptyCart } from "@/public/images/index";
 
 const CardData = () => {
-  const { cart } = useContext(GlobalContext);
   const [showCard, setShowCard] = useState(false);
-
+  const cart = useSelector((state) => state.Cart.cartProducts);
   return (
     <>
       <div>
         <div className="relative">
           <FaShoppingCart onClick={() => setShowCard(!showCard)} />
           <span className="absolute font-titleFont top-3 -right-2 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-white">
-            {/* {products.length > 0 ? products.length : 0} */}
-            {cart?.cartItems ? <> {cart?.cartItems.length} </> : <>0</>}
+            {cart.length}
           </span>
           {/* card box */}
           {showCard && (
@@ -30,9 +27,9 @@ const CardData = () => {
               transition={{ duration: 0.5 }}
               className="absolute top-8 right-0 z-50 bg-primeColor w-[320px] text-[#767676] h-auto px-4 pb-2"
             >
-              {cart?.cartItems.length > 0 ? (
+              {cart.length > 0 ? (
                 <>
-                  {cart?.cartItems.map((item, index) => (
+                  {cart.map((item, index) => (
                     <ItemCard key={index} item={item} />
                   ))}
                   <div className=" my-2 w-full h-[35px]">
