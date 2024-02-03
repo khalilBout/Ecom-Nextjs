@@ -33,7 +33,7 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/dashboard", "/profile"],
+  matcher: ["/dashboard", "/profile/:path*"],
 };
 
 // import { NextResponse } from "next/server";

@@ -1,14 +1,15 @@
 "use client";
-import React, { useContext, useEffect } from "react";
-import { GlobalContext } from "@/services/context/GlobalContext";
+import React, { useContext } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { FiShoppingBag } from "react-icons/fi";
+import { CiShoppingCart } from "react-icons/ci";
 // import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const InfoClient = ({ user }) => {
   // const searchParams = useSearchParams();
   // const pathname = usePathname();
   // const { replace } = useRouter();
-  const { cart, clearCart } = useContext(GlobalContext);
   // const userId = user?.id;
 
   // useEffect(() => {
@@ -18,60 +19,62 @@ const InfoClient = ({ user }) => {
   // }, [userId]);
 
   return (
-    <div>
-      <h1>
-        Name:<span className="text-red-400">{user?.name}</span>
-      </h1>
-      <h1>
-        Email:<span className="text-red-400">{user?.email}</span>
-      </h1>
-      <Image
-        width={90}
-        height={90}
-        src={user?.image}
-        alt={user?.name}
-        className="w-[90px] h-[90px] rounded-full bg-green-100 "
-      />
-      <div className="">
-        <h2>My Product Card </h2>
-        {cart?.cartItems && cart.cartItems.length > 0 ? (
-          <>
-            {cart?.cartItems.map((item) => (
-              <div className=" bg-gray-300 rounded-md flex w-[350px]">
-                <img
-                  className=" mx-2 w-[50px] h-[50px] rounded-full "
-                  src={item.imageModel}
-                  alt={item.titleProduct}
-                />
-                <div className="">
-                  <h3>
-                    Product:
-                    <span className="text-red-400">{item.titleProduct}</span>
-                  </h3>
-                  <h3>
-                    price:
-                    <span className="text-red-400">{item.finalPrice}</span>
-                  </h3>
-                  <h3>
-                    Qt:<span className="text-red-400">{item.Qt} </span>
-                  </h3>
-                  <button
-                    className="bg-red-700 px-4 py-2 rounded-md cursor-pointer"
-                    onClick={() => clearCart()}
-                  >
-                    clearCart
-                  </button>
-                </div>
-              </div>
-            ))}
-          </>
-        ) : (
-          <>
-            <p>Cart is empty</p>
-          </>
-        )}
+    <>
+      <figure className="flex items-start sm:items-center">
+        <div className="relative w-[90px] h-[90px] m-4">
+          <Image
+            quality={100}
+            src={user?.image}
+            alt={user?.name}
+            fill
+            className=" rounded-full mr-4 bg-green-100 "
+          />
+        </div>
+        <figcaption>
+          <h5 className="font-semibold text-lg">{user?.name}</h5>
+          <p>{user?.email}</p>
+        </figcaption>
+      </figure>
+
+      <hr className="my-4" />
+
+      <div className="mb-5 gap-4">
+        <figure className="w-full flex align-center bg-gray-100 p-4 rounded-md cursor-pointer">
+          <div className="mr-3">
+            <span className="flex items-center justify-center text-yellow-500 w-12 h-12 bg-white rounded-full shadow mt-2">
+              <FiShoppingBag />
+            </span>
+          </div>
+          <figcaption className="text-gray-600">
+            <div>
+              <h2 className="text-gray-900 font-bold text-[18px]">
+                {" "}
+                My Card:{" "}
+                <span className="text-gray-600 text-[16px]">
+                  {" "}
+                  02 Products{" "}
+                </span>{" "}
+              </h2>
+              <h2 className="text-gray-900 font-bold">
+                {" "}
+                My Order: <span className="text-gray-600">
+                  {" "}
+                  04 Orders{" "}
+                </span>{" "}
+              </h2>
+            </div>
+          </figcaption>
+        </figure>
       </div>
-    </div>
+      <div className="flex justify-end ">
+        <Link href="/shop" className="">
+          <button className="flex gap-2 items-center px-4 py-2 text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100">
+            <CiShoppingCart size={18} /> Go To Shopping
+          </button>
+        </Link>
+      </div>
+      <hr className="my-4" />
+    </>
   );
 };
 

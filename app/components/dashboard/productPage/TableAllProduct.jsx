@@ -125,7 +125,8 @@ function Tr({ item }) {
                     key={i}
                     className="text-[14px] font-medium text-gray-600 bg-gray-200 rounded-md px-2 mx-1"
                   >
-                    {x?.theSize}: {x?.stoke} Pic
+                    {x?.theSize}:
+                    <span className="text-red-600">{x?.stoke} Pic</span>
                   </span>
                 ))}
               </span>

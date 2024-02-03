@@ -13,11 +13,6 @@ const OrderSchema = new mongoose.Schema({
     required: [false],
   },
   shippingAddress: {
-    profileId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Profile",
-      required: [false],
-    },
     clientName: {
       type: String,
       required: [true],

@@ -6,7 +6,7 @@ import { FaUser, FaCaretDown } from "react-icons/fa";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-// import { emptyCart } from "@/public/images/index";
+import { emptyCart } from "@/public/images/index";
 
 const userData = () => {
   const router = useRouter();
@@ -20,9 +20,9 @@ const userData = () => {
         <div onClick={() => setShowUser(!showUser)} className="flex items-end">
           {session && session.status === "authenticated" && (
             <div className="flex justify-start items-center ">
-              <p className="text-gray-600 text-[14px] px-2 py-1 bg">
+              {/* <p className="text-gray-600 text-[14px] px-2 py-1 bg">
                 {session?.data.user.name}
-              </p>
+              </p> */}
               <Image
                 width={35}
                 height={35}
@@ -35,9 +35,9 @@ const userData = () => {
           {session && session.status === "unauthenticated" && (
             <FaUser size={22} />
           )}
-          <div className="">
+          {/* <div className="">
             <FaCaretDown size={22} />
-          </div>
+          </div> */}
         </div>
         {showUser && (
           <motion.ul

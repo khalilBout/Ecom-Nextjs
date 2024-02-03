@@ -9,7 +9,7 @@ const page = async ({ params }) => {
   return (
     <div className="w-full m-2">
       <h2 className="text-2xl font-bold m-2 ">
-        Update Product: <span className="text-red-400"> {data.title}</span>
+        Update Product: <span className="text-red-400"> {data?.title}</span>
       </h2>
       <FormUpdateProduct data={data} />
     </div>

@@ -35,27 +35,24 @@ const Product = ({ product }) => {
 
   return (
     <Link href={`/shop/${product._id}`} className="w-full relative group">
-      <div className="max-w-80 max-h-80 relative overflow-y-hidden ">
-        <div>
+      <div className=" relative overflow-y-hidden ">
+        <div className="w-full">
           {allImages.length > 0 ? (
-            <>
+            <div className="w-full min-h-[330px] border-2 bg-gray-100">
               <Image
-                width={100}
-                height={100}
-                className="w-full h-full"
+                // width={100}
+                // height={100}
+                quality={100}
+                fill
+                objectFit="cover"
+                objectPosition="center"
                 src={allImages[0]}
                 alt="FirstImage"
               />
-            </>
+            </div>
           ) : (
             <>
-              <Image
-                width={100}
-                height={100}
-                className="w-full h-full"
-                src={empty}
-                alt="noImage"
-              />
+              <Image width={100} height={100} src={empty} alt="noImage" />
             </>
           )}
         </div>

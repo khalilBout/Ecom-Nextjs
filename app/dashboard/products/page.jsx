@@ -5,7 +5,7 @@ import { getProducts } from "@/services/getData/product/getFilterData";
 import Link from "next/link";
 import TableAllProduct from "../../components/dashboard/productPage/TableAllProduct";
 import CategorySelect from "@/app/components/dashboard/productPage/CategorySelect";
-import SearchComponent from "@/app/components/navbar/SearchComponent";
+import SearchComponent from "@/app/components/navbar/SearchInput";
 import PaginationCom from "@/app/components/shopPage/uiShop/PaginationCom";
 
 const AllProducts = async ({ searchParams }) => {
@@ -22,15 +22,19 @@ const AllProducts = async ({ searchParams }) => {
           <div class="text-2xl p-2  font-medium">Manage Products</div>
         </div>
         <div className="flex justify-between">
-          <div class="w-full  flex justify-between items-center mb-4 ">
+          <div class="w-full mx-2 flex justify-between items-center mb-4 ">
             <CategorySelect />
-            <SearchComponent />
+            <div className="mr-4 grow">
+              <SearchComponent />
+            </div>
             <PaginationCom count={count} />
-            <Link href="/dashboard/products/addProduct">
-              <button className="mx-1 text-sm font-medium py-2 px-4 rounded-md rounded-bl-md  bg-green-300 text-primeColor hover:text-lightText hover:bg-primeColor">
-                Add Product
-              </button>
-            </Link>
+            <div className="w-full flex justify-end ">
+              <Link href="/dashboard/products/addProduct">
+                <button className="mx-2 text-sm font-medium py-2 px-4 rounded-md rounded-bl-md  bg-green-300 text-primeColor hover:text-lightText hover:bg-primeColor">
+                  Add Product
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
         <div></div>

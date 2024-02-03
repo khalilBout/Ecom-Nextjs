@@ -104,17 +104,17 @@ const Banner = () => {
   return (
     <div className="w-full bg-white">
       <Slider {...settings}>
-        <Link href="/offer">
+        <Link href="/shop">
           <div>
             <Image src={bannerImgOne} alt="bannerImgOne" />
           </div>
         </Link>
-        <Link href="/offer">
+        <Link href="/shop">
           <div>
             <Image src={bannerImgTwo} alt="bannerImgTwo" />
           </div>
         </Link>
-        <Link href="/offer">
+        <Link href="/shop">
           <div>
             <Image src={bannerImgThree} alt="bannerImgThree" />
           </div>

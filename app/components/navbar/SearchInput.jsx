@@ -23,7 +23,7 @@ const SearchComponent = () => {
 
   return (
     <>
-      <div className="border border-gray-400 relative w-full lg:w-[500px] h-[40px] text-base text-primeColor bg-white flex items-center gap-2 justify-between px-6 rounded-xl">
+      <div className="mx-4 border border-gray-400 relative w-full h-[38px] text-base text-primeColor bg-white flex items-center gap-2 justify-between px-6 rounded-xl">
         <input
           className="flex-1 h-full outline-none placeholder:text-[#C4C4C4] placeholder:text-[14px]"
           type="text"

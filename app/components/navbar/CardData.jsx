@@ -25,17 +25,17 @@ const CardData = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="absolute top-8 right-0 z-50 bg-primeColor w-[320px] text-[#767676] h-auto px-4 pb-2"
+              className="absolute top-12 -right-16 md:-right-8 z-50 bg-gray-50 w-[320px] text-[#767676] h-auto px-2 pb-2"
             >
               {cart.length > 0 ? (
                 <>
                   {cart.map((item, index) => (
                     <ItemCard key={index} item={item} />
                   ))}
-                  <div className=" my-2 w-full h-[35px]">
+                  <div className=" my-1 w-full h-[35px]">
                     <Link
                       href="/checkout"
-                      className="w-full h-full bg-green-200 text-lightText hover:bg-lightText hover:text-primeColor cursor-pointer flex justify-center items-center"
+                      className="w-full h-full bg-gray-200 text-lightText hover:bg-lightText hover:text-primeColor cursor-pointer flex justify-center items-center"
                       onClick={() => setShowCard(false)}
                     >
                       Checkout

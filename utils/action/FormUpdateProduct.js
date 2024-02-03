@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import UpdateModel from "@/app/components/dashboard/productPage/UpdateModel";
 import ModelProduct from "@/app/components/dashboard/productPage/ModelProduct";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const FormUpdateProduct = ({ data }) => {
   const categoryList = ["man", "woman", "children"];
   const typeList = ["New", "Best", "Soled"];
   const [addModel, setAddModel] = useState(false);
+  const [laudingSend, setLaudingSend] = useState(false);
   const [listModels, setListModels] = useState(data.listModels);
 
   const [form, setForm] = useState({
@@ -38,6 +40,7 @@ const FormUpdateProduct = ({ data }) => {
     let modelDataSending = [];
     if (modelChanged.length > 0) {
       // add element no changed
+
       const modelNoChange = [];
       const listId = modelChanged.map((item) => {
         return item._id;
@@ -66,6 +69,7 @@ const FormUpdateProduct = ({ data }) => {
     const dataUpdated = updateModels();
     const id = data?._id;
     try {
+      setLaudingSend(true);
       const res = await fetch(
         `http://localhost:3000/api/admin/productAdmin/${id}`,
         {
@@ -82,8 +86,11 @@ const FormUpdateProduct = ({ data }) => {
       return data;
     } catch (e) {
       console.log(e);
+    } finally {
+      setLaudingSend(false);
     }
   };
+
   return (
     <div>
       {/* info of Product  */}
@@ -190,19 +197,24 @@ const FormUpdateProduct = ({ data }) => {
       {/* Add models  */}
       <div>
         {addModel && (
-          <div className=" w-full p-2">
+          <div className=" w-full p-2 relative">
             <ModelProduct
               caty={category}
               listModels={listModels}
               setListModels={setListModels}
             />
+            <button
+              onClick={() => setAddModel(false)}
+              className="flex justify-center items-center p-1 text-xl font-bold bg-red-300 rounded-full absolute top-4 right-4"
+            >
+              <IoIosCloseCircleOutline size={18} />
+            </button>
           </div>
         )}
       </div>
 
       <div className="flex flex-col justify-between mx-4">
         {/* Btn Add Model   */}
-
         {!addModel && (
           <div className="flex justify-end">
             <button
@@ -216,7 +228,12 @@ const FormUpdateProduct = ({ data }) => {
 
         {/* Btn Send Update Data   */}
         <button
-          className="px-4 py-2 my-2 bg-primeColor text-lightText hover:bg-lightText hover:text-primeColor cursor-pointer rounded-md w-full"
+          className={` ${
+            laudingSend === true
+              ? "bg-gray-300 text-primeColor cursor-move"
+              : "bg-primeColor text-lightText "
+          } px-4 py-2 my-2 cursor-pointer rounded-md w-full`}
+          disabled={laudingSend === true}
           onClick={() => sendUpdateData()}
         >
           Update Product

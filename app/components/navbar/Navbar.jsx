@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 // component
-import SearchNav from "@/app/components/navbar/SearchNav";
-
+// import SearchNav from "@/app/components/navbar/SearchNav";
+import UserData from "@/app/components/navbar/UserData";
+import CardData from "@/app/components/navbar/CardData";
 // images
 
 // icons
@@ -28,11 +29,6 @@ const navBarList = [
     _id: 1003,
     title: "About",
     link: "/about",
-  },
-  {
-    _id: 1005,
-    title: "Offer",
-    link: "/offer",
   },
 ];
 const Navbar = () => {
@@ -58,14 +54,15 @@ const Navbar = () => {
   return (
     <>
       <div className="w-full h-20 bg-white sticky top-0 z-50 border-b-[1px] border-b-gray-200">
-        <nav className="h-full px-4 max-w-container mx-auto relative">
+        <nav className="h-full px-8 max-w-container mx-auto relative">
           <div className="flex items-center justify-between h-full">
             <Link href="/">
               <div className="">
                 <h2 className="text-black text-lg">E-commerce </h2>
               </div>
             </Link>
-            <div>
+
+            <div className="flex">
               {showMenu && (
                 <motion.ul
                   initial={{ y: 30, opacity: 0 }}
@@ -77,7 +74,7 @@ const Navbar = () => {
                     {navBarList.map((item) => (
                       <Link
                         key={item._id}
-                        className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                        className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-6 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
                         href={item.link}
                       >
                         <li>{item.title}</li>
@@ -104,10 +101,20 @@ const Navbar = () => {
                   </>
                 </motion.ul>
               )}
-              <HiMenuAlt2
-                onClick={() => setSidenav(!sidenav)}
-                className="inline-block md:hidden cursor-pointer w-8 h-6 absolute top-6 right-4"
-              />
+
+              {/* user Info  */}
+              <div className="flex items-center">
+                <div className="flex gap-4 items-center px-2 cursor-pointer ">
+                  <UserData />
+                  <CardData />
+                </div>
+                <div className="block mx-2 md:hidden">
+                  <HiMenuAlt2
+                    onClick={() => setSidenav(!sidenav)}
+                    className="inline-block cursor-pointer w-8 h-6 "
+                  />
+                </div>
+              </div>
               {sidenav && (
                 <div className="fixed top-0 left-0 w-full h-screen bg-black text-gray-200 bg-opacity-80 z-50">
                   <motion.div
@@ -195,7 +202,6 @@ const Navbar = () => {
           </div>
         </nav>
       </div>
-      <SearchNav />
     </>
   );
 };

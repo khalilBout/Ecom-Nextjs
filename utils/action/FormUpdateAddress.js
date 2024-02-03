@@ -1,13 +1,18 @@
 "use client";
 import React, { useState } from "react";
 
-const FormAddAddress = ({ setAddressClient }) => {
+const FormUpdateAddress = ({
+  addressClient,
+  setAddressClient,
+  setAddressClientUpdated,
+}) => {
+  // console.log("addressClient for update:", addressClient);
   const [form, setForm] = useState({
-    clientName: "",
-    phone: "",
-    address: "",
-    city: "",
-    willai: "",
+    clientName: addressClient.clientName,
+    phone: addressClient.phone,
+    address: addressClient.address,
+    city: addressClient.city,
+    willai: addressClient.willai,
   });
 
   // ============= Error Msg  =================
@@ -54,7 +59,7 @@ const FormAddAddress = ({ setAddressClient }) => {
         form.willai
       ) {
         setAddressClient(form);
-
+        setAddressClientUpdated("");
         setForm({
           clientName: "",
           phone: "",
@@ -71,7 +76,7 @@ const FormAddAddress = ({ setAddressClient }) => {
       <form className="w-full lgl:w-[500px] flex items-center justify-center">
         <div className="px-6 py-4 w-full flex flex-col justify-start ">
           <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-2xl mb-4">
-            Add Address shipping...
+            Update Address shipping...
           </h1>
           <div className="flex flex-col gap-3">
             {/* client name */}
@@ -84,6 +89,7 @@ const FormAddAddress = ({ setAddressClient }) => {
                 name="clientName"
                 className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                 type="text"
+                value={form.clientName}
                 placeholder="eg. John Doe"
               />
               {errClientName && (
@@ -104,6 +110,7 @@ const FormAddAddress = ({ setAddressClient }) => {
                 name="phone"
                 className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                 type="text"
+                value={form.phone}
                 placeholder="008801234567891"
               />
               {errPhone && (
@@ -123,6 +130,7 @@ const FormAddAddress = ({ setAddressClient }) => {
                 name="address"
                 className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                 type="text"
+                value={form.address}
                 placeholder="road-001, house-115, example area"
               />
               {errAddress && (
@@ -142,6 +150,7 @@ const FormAddAddress = ({ setAddressClient }) => {
                 name="city"
                 className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                 type="text"
+                value={form.city}
                 placeholder="Your city"
               />
               {errCity && (
@@ -161,7 +170,8 @@ const FormAddAddress = ({ setAddressClient }) => {
                 name="willai"
                 className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
                 type="text"
-                placeholder="Your country"
+                value={form.willai}
+                placeholder="Your willai"
               />
               {errWillai && (
                 <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
@@ -178,7 +188,7 @@ const FormAddAddress = ({ setAddressClient }) => {
                 className="w-4 h-4 mt-1 mdl:mt-0 cursor-pointer"
                 type="checkbox"
                 name="checked"
-                value={!form.checked}
+                value={form.checked}
               />
               <p className="text-sm text-primeColor">
                 I agree to the OREBI{" "}
@@ -194,7 +204,7 @@ const FormAddAddress = ({ setAddressClient }) => {
                   : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200 cursor-none"
               } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}
             >
-              Add Address
+              Update Address
             </button>
           </div>
         </div>
@@ -203,4 +213,4 @@ const FormAddAddress = ({ setAddressClient }) => {
   );
 };
 
-export default FormAddAddress;
+export default FormUpdateAddress;

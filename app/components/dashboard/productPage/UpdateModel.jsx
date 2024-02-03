@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 import SizeProduct from "./SizeProduct";
 import UploadImage from "./UploadImage";
@@ -11,6 +11,8 @@ const UpdateModel = ({
   modelChanged,
   setModelChanged,
   deleteModel,
+  // isModelChangedForGlobalState,
+  // setIsModelChangedForGlobalState,
 }) => {
   const [addSize, setAddSize] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
@@ -28,6 +30,18 @@ const UpdateModel = ({
     url,
     // isChanged,
   };
+  const UpdateListModel = () => {
+    const list = modelChanged.filter((x) => x._id !== NewDataModel._id);
+    setModelChanged([...list, NewDataModel]);
+    setIsChanged(false);
+  };
+  // useEffect(() => {
+  //   if (isChanged == true) {
+  //     setIsModelChangedForGlobalState(true);
+  //   } else {
+  //     setIsModelChangedForGlobalState(false);
+  //   }
+  // }, [isChanged]);
 
   // delete size
   const deleteSize = (id) => {
@@ -51,13 +65,10 @@ const UpdateModel = ({
       newList.push(x);
     });
     setSize(newList);
-  };
-  const UpdateListModel = () => {
-    const list = modelChanged.filter((x) => x._id !== NewDataModel._id);
-    setModelChanged([...list, NewDataModel]);
-    setIsChanged(false);
+    setIsChanged(true);
   };
 
+  // console.log("global state from chedren:", isModelChangedForGlobalState);
   return (
     <>
       <div className=" p-2 rounded-md bg-blue-50 flex gap-2 flex-col mdl:flex-row justify-between">
@@ -130,11 +141,14 @@ const UpdateModel = ({
               {url?.map((item, i) => (
                 <div key={i} className="relative w-[90px] h-[110px] rounded-md">
                   <Image
+                    fill
+                    objectFit="cover"
+                    objectPosition="center"
                     src={item}
                     alt={`image${i}`}
                     className="rounded-md"
-                    width={90}
-                    height={110}
+                    // width={90}
+                    // height={110}
                   />
                   <div className="text-black cursor-pointer w-[16px] h-[16px] rounded-full absolute top-2 right-2">
                     <HiOutlineTrash size={15} />

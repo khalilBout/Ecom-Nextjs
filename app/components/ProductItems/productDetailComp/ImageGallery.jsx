@@ -30,11 +30,7 @@ const ImageGallery = ({ product }) => {
 
   /////////////////////////////////////////////////
   // select image display
-  if (
-    colorProduct === undefined ||
-    colorProduct === null ||
-    colorProduct === ""
-  ) {
+  if (colorProduct === undefined || null || " ") {
     var displayImage = allImages;
   } else {
     var displayImage = modelImages;
@@ -42,20 +38,23 @@ const ImageGallery = ({ product }) => {
   ////////////////////////////////
 
   return (
-    <div className="images flex flex-col-reverse sml:flex-row ">
+    <div className=" flex flex-col-reverse justify-center items-center sml:flex-row ">
       <div className="all-images flex flex-row col-span-2 sml:flex-col justify-center mx-4 gap-2">
         {displayImage?.map((url, index) => (
-          <div key={index} className="image relative rounded-lg">
+          <div key={index} className="w-[70px] h-[80px] relative rounded-lg">
             <Image
               onClick={() => setSelectedImage(index)}
-              className={` rounded-lg mb-3 p-1 object-cover object-top ${
+              className={`rounded-lg mb-3 p-1 object-cover object-top ${
                 selectedImage === index
                   ? "border-[1px] border-purple-500"
                   : "border-[1px] border-purple-200"
               }`}
               src={url}
-              width={70}
-              height={70}
+              // width={70}
+              // height={70}
+              fill
+              objectFit="cover"
+              objectPosition="center"
               alt={`Image ${index + 1}`}
             />
           </div>
@@ -63,23 +62,25 @@ const ImageGallery = ({ product }) => {
       </div>
       <div className="flex justify-center items-center m-2">
         {displayImage.length === 0 ? (
-          <>
+          <div className="w-[300px] h-[450px]">
             <Image
               src={empty}
-              className=" object-cover object-top border-[1px] border-purple-200"
-              alt=""
-              height={600}
-              width={400}
+              className=" border-[1px] border-purple-200"
+              alt="noImage"
+              fill
+              objectFit="cover"
+              objectPosition="center"
             />
-          </>
+          </div>
         ) : (
-          <div className="selected-image col-span-5">
+          <div className="border-[1px] border-purple-200  relative w-[300px] h-[450px]">
             <Image
               src={displayImage[selectedImage]}
-              className=" object-cover object-top border-[1px] border-purple-200"
-              alt=""
-              height={600}
-              width={400}
+              alt={product.title}
+              quality={100}
+              fill
+              objectFit="cover"
+              objectPosition="center"
             />
           </div>
         )}

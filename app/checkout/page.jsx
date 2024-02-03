@@ -1,33 +1,37 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import ItemCard from "@/app/components/cardPage/ItemCard";
 
-import { GlobalContext } from "@/services/context/GlobalContext";
 import ItemCardCheckout from "../components/cardPage/ItemCardCheckout";
 import EmptyCard from "../components/checkoutPage/EmptyCard";
 import TotalsCart from "../components/checkoutPage/TotalsCart";
-import Address from "../components/checkoutPage/Address";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetBasket } from "@/redux/CartSlice";
 import toast from "react-hot-toast";
+import FormAddAddress from "@/utils/action/FormAddAddress";
+import FormUpdateAddress from "@/utils/action/FormUpdateAddress";
+import axios from "axios";
 
 const Checkout = () => {
   const session = useSession();
   const cart = useSelector((state) => state.Cart.cartProducts);
   const dispatch = useDispatch();
-
-  // const { cart, clearCart} = useContext(GlobalContext);
   const router = useRouter();
   const [addressClient, setAddressClient] = useState(null);
+  const [addressClientUpdated, setAddressClientUpdated] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const updateInfo = (e) => {
+    e.preventDefault();
+    setAddressClientUpdated("update");
+  };
 
   const OrderData = {
-    // userId: user?.id || null,
     userName: session?.data?.user.name || null,
     email: session?.data?.user.email || null,
-
     shippingAddress: {
       clientName: addressClient?.clientName,
       address: addressClient?.address,
@@ -46,24 +50,24 @@ const Checkout = () => {
     })),
   };
   const sendOrder = async () => {
-    console.log("order data:", OrderData);
     try {
-      const response = await fetch("http://localhost:3000/api/order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(OrderData),
-      });
-
+      setLoading(true);
+      // const response = await fetch("http://localhost:3000/api/order", {
+      //   method: "POST",
+      //   body: JSON.stringify(OrderData),
+      // });
+      const response = await axios.post("/api/order", OrderData);
+      console.log("response:", response);
       if (response.status === 201) {
-        clearCart();
+        dispatch(resetBasket());
         toast.success("add your Order ..");
         router.push("/");
       }
     } catch (e) {
       console.log(e);
       toast.error(e, "no product sending ...");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,30 +75,32 @@ const Checkout = () => {
     <div className="max-w-container mx-auto px-4">
       {cart?.length > 0 ? (
         <>
-          <div className="mdl:flex gap-4">
-            <div className="w-full mdl:w-1/2 pb-20 ">
+          <div className="mdl:flex gap-2">
+            <div className="w-full mdl:w-1/2 pb-8 ">
               <div className="mt-5">
-                {cart?.map((item) => (
-                  <div className="" key={item.titleProduct}>
-                    <div className="sml:hidden">
-                      <ItemCard item={item} />
-                    </div>
-                    <div className="hidden sml:block">
+                {cart?.map((item, ind) => (
+                  <>
+                    <div className="hidden sml:block" key={ind}>
                       <ItemCardCheckout item={item} />
                     </div>
-                  </div>
+                    <div className="block sml:hidden" key={item.idModel}>
+                      <ItemCard item={item} />
+                    </div>
+                  </>
                 ))}
               </div>
-              <button
-                // onClick={clearCart}
-                onClick={() => {
-                  dispatch(resetBasket());
-                  toast.success("your cart is empty ..");
-                }}
-                className="py-2 px-10 bg-red-500 text-white font-semibold uppercase mb-4 hover:bg-red-700 duration-300"
-              >
-                Reset cart
-              </button>
+              <div className="flex justify-end">
+                <button
+                  // onClick={clearCart}
+                  onClick={() => {
+                    dispatch(resetBasket());
+                    toast.success("your cart is empty ..");
+                  }}
+                  className="my-2 py-2 px-10 bg-red-500 text-white font-semibold uppercase mb-4 hover:bg-red-700 duration-300"
+                >
+                  Reset cart
+                </button>
+              </div>
               {/* Totals Cart  */}
               <TotalsCart />
             </div>
@@ -106,50 +112,94 @@ const Checkout = () => {
                 {session.status === "loading" && <p>loading...</p>}
                 {session.status === "authenticated" && (
                   <>
-                    <p className="text-[22px] font-bold ">
+                    <p className="text-[18px] sm:text-[22px]">
                       Hi{" "}
                       <span className="text-[red]">
-                        {" "}
-                        {session?.data?.user.name}{" "}
+                        {session?.data?.user.name}
                       </span>
+                      , welcome to E-commerce .
                     </p>
                   </>
                 )}
                 {session.status === "unauthenticated" && (
-                  <>
-                    <h2 className="text-[20px]">you are not login </h2>
+                  <div className="flex justify-between items-center bg-red-100 px-4 py-2">
+                    <h2 className="text-xl mdl:2xl">
+                      Hi , You Are Not Login...{" "}
+                    </h2>
                     <Link
                       href="/login"
-                      className="bg-green-200 px-3 py-1 rounded-lg cursor-pointer hover:bg-slate-400"
+                      className="bg-green-200 px-4 py-1 text-xl mdl:2xl rounded-lg cursor-pointer hover:bg-slate-400"
                     >
                       Login
                     </Link>
-                  </>
+                  </div>
                 )}
               </div>
-              {addressClient === null ? (
-                <>
-                  <Address setAddressClient={setAddressClient} />
-                </>
-              ) : (
-                <>
-                  <h2 className="text-[red] text-3xl my-2">Client Info </h2>
-                  <h3 className="text-xl mx-2">
-                    Name:{addressClient.clientName}
+              {addressClient === null && addressClientUpdated === "" && (
+                <FormAddAddress setAddressClient={setAddressClient} />
+              )}
+
+              {addressClient !== null && addressClientUpdated === "" && (
+                <div>
+                  <h2 className="text-[red] text-2xl bg-gray-300 my-2 px-1 py-2">
+                    Sipping Info Client
+                  </h2>
+                  <h3 className="text-xl mx-2 font-medium font-titleFont">
+                    Name:
+                    <span className="text-gray-600 ml-2 font-titleFont">
+                      {addressClient.clientName}
+                    </span>
                   </h3>
-                  <h3 className="text-xl mx-2">Phone: {addressClient.phone}</h3>
-                  <h3 className="text-xl mx-2">
-                    Address: {addressClient.address}
+
+                  <h3 className="text-xl mx-2 font-medium font-titleFont">
+                    Phone:
+                    <span className="text-gray-600 ml-2 font-titleFont">
+                      {addressClient.phone}
+                    </span>
                   </h3>
-                  <h3 className="text-xl mx-2">City:{addressClient.city}</h3>
-                  <h3 className="text-xl mx-2">
-                    Willai:{addressClient.willai}
+
+                  <h3 className="text-xl mx-2 font-medium font-titleFont">
+                    Address:
+                    <span className="text-gray-600 ml-2 font-titleFont">
+                      {addressClient.address}
+                    </span>
                   </h3>
-                </>
+
+                  <h3 className="text-xl mx-2 font-medium font-titleFont">
+                    City:
+                    <span className="text-gray-600 ml-2 font-titleFont">
+                      {addressClient.city}
+                    </span>
+                  </h3>
+
+                  <h3 className="text-xl mx-2 font-medium font-titleFont">
+                    Willai:
+                    <span className="text-gray-600 ml-2 font-titleFont">
+                      {addressClient.willai}
+                    </span>
+                  </h3>
+                  <div className="flex justify-end w-full">
+                    <button
+                      className="bg-green-200 hover:bg-green-400 cursor-pointer px-2 py-1 my-2 rounded-md font-medium font-titleFont"
+                      onClick={updateInfo}
+                    >
+                      Update Info
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {addressClient !== null && addressClientUpdated === "update" && (
+                <FormUpdateAddress
+                  addressClient={addressClient}
+                  setAddressClient={setAddressClient}
+                  setAddressClientUpdated={setAddressClientUpdated}
+                />
               )}
             </div>
           </div>
-          <div>
+          {/* Btn Send Order  */}
+          <div className="my-2">
             <button
               onClick={sendOrder}
               disabled={!addressClient}
@@ -159,7 +209,7 @@ const Checkout = () => {
                   : "bg-gray-500 hover:bg-gray-500 hover:text-gray-200"
               } w-full text-gray-200 text-base font-medium h-10 rounded-md hover:text-white duration-300`}
             >
-              Send Order
+              {loading ? <>loading...</> : <>Send Order</>}
             </button>
           </div>
         </>

@@ -28,7 +28,7 @@ const InfoProduct = ({ product, globalStoke }) => {
           <div className="border-b border-gray-400">
             <h2 className="text-[14px] mdl:text-[16px]">Description</h2>
           </div>
-          <div className=" flow-root text-gray-500 sm:mt-2">
+          <div className=" flow-root text-gray-500 sm:mt-2 font-titleFont">
             {product && product.desc}
           </div>
         </div>

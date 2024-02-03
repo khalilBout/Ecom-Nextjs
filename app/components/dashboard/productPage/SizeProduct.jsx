@@ -74,7 +74,7 @@ const SizeProduct = ({ size, setSize, caty, setIsChanged }) => {
           onClick={handelAddSize}
           className="px-2 py-1 text-[14px] bg-red-200 h-[30px] rounded-lg hover:bg-red-400"
         >
-          Add Size
+          Select
         </button>
       </div>
     </div>

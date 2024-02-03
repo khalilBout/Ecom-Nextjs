@@ -8,12 +8,6 @@ const ColorProduct = ({ selectedColor, setSelectedColor, setIsChanged }) => {
   const [open, setOpen] = useState(false);
   const [color, setColor] = useState();
 
-  const handleColorButtonClick = () => {
-    setSelectedColor(color);
-    setOpen(false);
-    setIsChanged(true);
-  };
-
   return (
     <div className="">
       {/* colors data  */}
@@ -30,19 +24,14 @@ const ColorProduct = ({ selectedColor, setSelectedColor, setIsChanged }) => {
           >
             Color
           </button>
-          {open && (
-            <button
-              className="h-[30px] basis-1/2 flex items-center space-x-1 bg-green-400 rounded-lg px-2 text-[14px]"
-              onClick={handleColorButtonClick}
-            >
-              Update
-            </button>
-          )}
         </div>
         {/* display color  */}
         <div className="h-[35px]">
           {selectedColor?.length > 0 && (
             <div className="flex items-center space-x-2 mx-1">
+              <span className="border-[1px] rounded-lg p-1 px-3 text-[14px]">
+                {color || selectedColor}
+              </span>
               <div
                 style={{
                   width: "30px",
@@ -52,9 +41,7 @@ const ColorProduct = ({ selectedColor, setSelectedColor, setIsChanged }) => {
                   display: "inline-block",
                 }}
               ></div>
-              <span className="border-[1px] rounded-lg p-1 px-3 text-[14px]">
-                {color || selectedColor}
-              </span>
+
               {/* <button
                 className="bg-red-400 hover:bg-red-600 w-[30px] h-[30px] border-[1px] rounded-full p-1 flex justify-center items-center"
                 onClick={handleDeleteColor}
@@ -71,7 +58,10 @@ const ColorProduct = ({ selectedColor, setSelectedColor, setIsChanged }) => {
         {open && (
           <ColorPicker
             color={color}
-            onChange={(color) => setColor(color.hex)}
+            onChange={(color) => {
+              setSelectedColor(color.hex);
+              setColor(color.hex);
+            }}
           />
         )}
       </div>
