@@ -92,12 +92,6 @@ const Orders = ({ data }) => {
           ))}
         </tbody>
       </table>
-      {/* <div className="mb-6">
-      <CustomPagination
-        resPerPage={data?.resPerPage}
-        productsCount={data?.filteredProductsCount}
-      />
-    </div> */}
     </div>
   );
 };

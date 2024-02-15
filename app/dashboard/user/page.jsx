@@ -4,7 +4,7 @@ import React from "react";
 import getFilterUsers from "@/services/getData/user/getFilterUsers";
 import Link from "next/link";
 import TableUser from "../../components/dashboard/userPage/TableUser";
-import SearchComponent from "@/app/components/navbar/SearchComponent";
+// import SearchComponent from "@/app/components/navbar/SearchComponent";
 import PaginationCom from "@/app/components/shopPage/uiShop/PaginationCom";
 //  import CategorySelect from "@/app/components/dashboard/productPage/CategorySelect";
 //  import SearchComponent from "@/app/components/navbar/SearchComponent";
@@ -23,7 +23,7 @@ const page = async ({ searchParams }) => {
         </div>
         <div className="flex justify-between">
           <div class="w-full  flex justify-between items-center mb-4 ">
-            <SearchComponent />
+            {/* <SearchComponent /> */}
             <PaginationCom count={count} />
           </div>
         </div>

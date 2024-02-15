@@ -3,12 +3,12 @@ import { GlobalContext } from "@/services/context/GlobalContext";
 import Link from "next/link";
 import React, { useContext } from "react";
 
-const TotalsCart = () => {
+const TotalsCart = ({ taxDelivery }) => {
   const { cart } = useContext(GlobalContext);
 
   const priceList = cart?.cartItems.map((x) => x.finalPrice * x.Qt);
   const totalPrice = priceList?.reduce((a, c) => a + c, 0);
-  const shippingCharge = 100;
+  const shippingCharge = taxDelivery;
 
   return (
     <div className="max-w-7xl gap-4 flex justify-end mt-2">

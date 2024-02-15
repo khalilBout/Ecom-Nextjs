@@ -6,7 +6,7 @@ import Product from "@/models/product";
 export const POST = async (request) => {
   const body = await request.json();
 
-  const { userName, email, shippingAddress, orderItems } = body;
+  const { userName, email, shippingAddress, orderItems, taxDelivery } = body;
 
   const promises = orderItems.map(async (item) => {
     const productOrder = await Product.findById(item.productID);
@@ -39,11 +39,10 @@ export const POST = async (request) => {
   });
 
   const orderProduct = await Promise.all(promises);
-  const shippingCharge = 100;
 
   const totolPyment = orderProduct.reduce(
     (total, item) => item.PriceAfterDesc + total,
-    shippingCharge
+    taxDelivery
   );
   const dataOrder = {
     userName,
@@ -51,6 +50,7 @@ export const POST = async (request) => {
     shippingAddress,
     orderProduct,
     totolPyment,
+    taxDelivery,
   };
   // console.log("order data from api:", dataOrder);
   try {

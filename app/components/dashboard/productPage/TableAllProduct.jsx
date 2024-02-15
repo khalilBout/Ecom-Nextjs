@@ -1,5 +1,5 @@
 import React from "react";
-// import orderImg from "@/public/images/order.png";
+import productNoImg from "@/public/productNoImg.png";
 import Image from "next/image";
 import BtnDelete from "@/utils/action/BtnDelete";
 import Link from "next/link";
@@ -62,6 +62,7 @@ function Tr({ item }) {
     createdAt,
   } = item;
   // const {size, selectedColor, url}=listModels
+
   const StokeOfModel = listModels?.map((item) => {
     const value = item.size.map((x) => x.stoke);
     const total = value.reduce((a, c) => a + c, 0);
@@ -73,12 +74,16 @@ function Tr({ item }) {
     <>
       <tr>
         {/* Image  */}
-        <td className="py-2 px-4 border-b border-b-gray-50">
-          <div className="flex items-center">
-            <img
-              src={listModels && listModels[0].url}
-              alt="productImage"
-              className="h-[50px] w-[50px] rounded-full object-cover overflow-hidden bg-teal-400"
+        <td className="py-2 px-4 border-b border-b-gray-50 ">
+          <div className="relative h-[60px] w-[60px]">
+            <Image
+              fill
+              quality={100}
+              objectFit="cover"
+              objectPosition="center"
+              src={listModels[0].url[0] || productNoImg}
+              alt={title}
+              className="rounded-full object-cover overflow-hidden bg-teal-400"
               // className="text-gray-600 text-sm font-medium hover:text-blue-500 ml-2 truncate"
             />
           </div>

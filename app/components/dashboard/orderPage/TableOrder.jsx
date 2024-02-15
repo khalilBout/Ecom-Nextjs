@@ -3,6 +3,8 @@ import orderImg from "@/public/images/order.png";
 import Image from "next/image";
 import BtnDelete from "@/utils/action/BtnDelete";
 import ProcessOrder from "@/utils/action/ProcessOrder";
+import { BiEdit } from "react-icons/bi";
+
 import Link from "next/link";
 const TableOrder = ({ allOrder }) => {
   return (
@@ -26,13 +28,16 @@ const TableOrder = ({ allOrder }) => {
               Phone
             </th>
             <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">
+              State
+            </th>
+            <th className="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">
               Action
             </th>
           </tr>
         </thead>
         <tbody>
           {allOrder?.map((order, ind) => (
-            <tr key={ind}>
+            <tr key={ind} className="bg-slate-100 mb-1">
               <td className="py-2 px-4 border-b border-b-gray-50">
                 <div className="flex items-center">
                   <Link
@@ -46,13 +51,17 @@ const TableOrder = ({ allOrder }) => {
               <td className="py-2 px-4 border-b border-b-gray-50">
                 {order?.orderProduct?.map((ProductItem, index) => (
                   <div key={index} className="flex gap-2 my-1">
-                    <Image
-                      width={8}
-                      height={10}
-                      src={ProductItem.imageModel || orderImg}
-                      alt={ProductItem.productTitle}
-                      className="w-8 h-10 rounded object-cover block"
-                    />
+                    <div className="relative w-[40px] h-[40px] rounded-full bg-black ">
+                      <Image
+                        fill
+                        objectFit="cover"
+                        objectPosition="center"
+                        quality={100}
+                        src={ProductItem.imageModel || orderImg}
+                        alt={ProductItem.productTitle}
+                        className="rounded-full"
+                      />
+                    </div>
                     <div className="flex flex-col">
                       <span className="text-[14px] font-medium text-gray-700">
                         {ProductItem?.productTitle}
@@ -93,18 +102,29 @@ const TableOrder = ({ allOrder }) => {
                 </span>
               </td>
               <td className="py-2 px-4 border-b border-b-gray-50">
-                <div className="flex gap-1">
-                  {order?.isProcess ? (
-                    <>
-                      <ProcessOrder orderID={`${order._id}`} />
-                    </>
-                  ) : (
-                    <span className="w-[65px] inline-block p-1 rounded bg-emerald-500/10 text-gray-600 font-medium text-[14px] leading-none">
-                      Dane
+                {order?.isProcess ? (
+                  <>
+                    {/* <ProcessOrder orderID={`${order._id}`} /> */}
+                    <span className="w-[60px] inline-block p-1 rounded bg-emerald-500/10 text-gray-600 font-medium text-[14px] leading-none bg-red-200">
+                      Prosses
                     </span>
-                  )}
+                  </>
+                ) : (
+                  <span className="w-[60px] inline-block p-1 rounded bg-emerald-500/10 text-gray-600 font-medium text-[14px] leading-none">
+                    Dane
+                  </span>
+                )}
+              </td>
+              <td className="py-2 px-4 border-b border-b-gray-50">
+                <div className="flex gap-1">
                   {/* /admin/order/${order._id} */}
                   <BtnDelete url={`/admin/orderAdmin/${order._id}`} />
+                  <Link
+                    href={`/dashboard/orders/${order._id}`}
+                    className="flex justify-center items-center"
+                  >
+                    <BiEdit size={20} color={"rgb(34,197,94)"}></BiEdit>
+                  </Link>
                 </div>
               </td>
             </tr>

@@ -16,13 +16,13 @@ const AllProducts = async ({ searchParams }) => {
   const { allProducts, count } = await getProducts(search, page, category);
 
   return (
-    <div class="w-full">
-      <div class="p-2 bg-white border border-gray-100 shadow-md shadow-black/5 rounded-md">
-        <div class="flex justify-between mb-4 items-start">
-          <div class="text-2xl p-2  font-medium">Manage Products</div>
+    <div className="w-full">
+      <div className="p-2 bg-white border border-gray-100 shadow-md shadow-black/5 rounded-md">
+        <div className="flex justify-between mb-4 items-start">
+          <div className="text-2xl p-2  font-medium">Manage Products</div>
         </div>
         <div className="flex justify-between">
-          <div class="w-full mx-2 flex justify-between items-center mb-4 ">
+          <div className="w-full mx-2 flex justify-between items-center mb-4 ">
             <CategorySelect />
             <div className="mr-4 grow">
               <SearchComponent />
@@ -38,7 +38,7 @@ const AllProducts = async ({ searchParams }) => {
           </div>
         </div>
         <div></div>
-        <div class="w-full">
+        <div className="w-full">
           <TableAllProduct data={allProducts} />
         </div>
       </div>

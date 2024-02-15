@@ -4,7 +4,7 @@ import React from "react";
 const ProductItem = ({ product }) => {
   const listOfStoke = product?.listModels.map((item) => {
     const value = item.size.map((x) => x.stoke);
-    const total = value.reduce((a, c) => a + c, 0);
+    const total = valueuce((a, c) => a + c, 0);
     return total;
   });
   const listOfColors = product?.listModels.map((item) => item.selectedColor);

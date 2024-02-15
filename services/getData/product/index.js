@@ -47,7 +47,7 @@ export const getAllProducts = async () => {
 
 export const getProductById = async (id) => {
   try {
-    const res = await fetch(`${process.env.GLOBAL_URL}/api/product/${id}`, {
+    const res = await fetch(`http://localhost:3000/api/product/${id}`, {
       method: "GET",
       cache: "no-store",
     });

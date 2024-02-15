@@ -23,12 +23,15 @@ const Checkout = () => {
   const [addressClient, setAddressClient] = useState(null);
   const [addressClientUpdated, setAddressClientUpdated] = useState("");
   const [loading, setLoading] = useState(false);
+  const [taxDelivery, setTaxDelivery] = useState(800);
 
   const updateInfo = (e) => {
     e.preventDefault();
     setAddressClientUpdated("update");
   };
-
+  // if (addressClient?.willai === "alger") {
+  //   setTaxDelivery(600);
+  // }
   const OrderData = {
     userName: session?.data?.user.name || null,
     email: session?.data?.user.email || null,
@@ -48,14 +51,11 @@ const Checkout = () => {
       imageModel: item.imageModel,
       sizeSelect: item.sizeSelect,
     })),
+    taxDelivery: taxDelivery,
   };
   const sendOrder = async () => {
     try {
       setLoading(true);
-      // const response = await fetch("http://localhost:3000/api/order", {
-      //   method: "POST",
-      //   body: JSON.stringify(OrderData),
-      // });
       const response = await axios.post("/api/order", OrderData);
       console.log("response:", response);
       if (response.status === 201) {
@@ -79,14 +79,14 @@ const Checkout = () => {
             <div className="w-full mdl:w-1/2 pb-8 ">
               <div className="mt-5">
                 {cart?.map((item, ind) => (
-                  <>
-                    <div className="hidden sml:block" key={ind}>
+                  <div className="" key={ind}>
+                    <div className="hidden sml:block">
                       <ItemCardCheckout item={item} />
                     </div>
-                    <div className="block sml:hidden" key={item.idModel}>
+                    <div className="block sml:hidden">
                       <ItemCard item={item} />
                     </div>
-                  </>
+                  </div>
                 ))}
               </div>
               <div className="flex justify-end">
@@ -102,7 +102,7 @@ const Checkout = () => {
                 </button>
               </div>
               {/* Totals Cart  */}
-              <TotalsCart />
+              <TotalsCart taxDelivery={taxDelivery} />
             </div>
             {/* user info  */}
 

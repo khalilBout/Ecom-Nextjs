@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 import SizeProduct from "./SizeProduct";
 import UploadImage from "./UploadImage";
@@ -28,7 +28,6 @@ const UpdateModel = ({
     size,
     selectedColor,
     url,
-    // isChanged,
   };
   const UpdateListModel = () => {
     const list = modelChanged.filter((x) => x._id !== NewDataModel._id);
@@ -117,7 +116,7 @@ const UpdateModel = ({
                 {addSize && (
                   <SizeProduct
                     setIsChanged={setIsChanged}
-                    setAddSize={setAddSize}
+                    // setAddSize={setAddSize}
                     size={size}
                     setSize={setSize}
                     caty={category}

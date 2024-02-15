@@ -98,7 +98,7 @@ const FormUpdateProduct = ({ data }) => {
         <div className="gap-1 mx-2 ">
           <div className="flex">
             <input
-              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-200 px-3 focus:border-2 outline-none m-1"
               placeholder="Name"
               type="text"
               name="title"
@@ -106,7 +106,7 @@ const FormUpdateProduct = ({ data }) => {
               onChange={handelChange}
             />
             <input
-              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-200 px-3 focus:border-2 outline-none m-1"
               placeholder="style"
               type="text"
               name="style"
@@ -116,7 +116,7 @@ const FormUpdateProduct = ({ data }) => {
           </div>
           <div className="flex">
             <input
-              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-200 px-3 focus:border-2 outline-none m-1"
               placeholder="price"
               type="number"
               name="price"
@@ -124,7 +124,7 @@ const FormUpdateProduct = ({ data }) => {
               onChange={handelChange}
             />
             <input
-              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-200 px-3 focus:border-2 outline-none m-1"
               placeholder="priceDrop"
               type="text"
               name="priceDrop"
@@ -134,7 +134,7 @@ const FormUpdateProduct = ({ data }) => {
           </div>
           <div className="flex">
             <select
-              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-200 px-3 focus:border-2 outline-none m-1"
               name="category"
               defaultValue={data.category}
               onChange={handelChange}
@@ -150,7 +150,7 @@ const FormUpdateProduct = ({ data }) => {
               ))}
             </select>
             <select
-              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1"
+              className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-200 px-3 focus:border-2 outline-none m-1"
               name="type"
               defaultValue={data.type}
               onChange={handelChange}
@@ -167,10 +167,11 @@ const FormUpdateProduct = ({ data }) => {
           </div>
 
           <textarea
-            className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-500 px-3 focus:border-2 outline-none m-1 "
+            className="w-full mdl:w-1/2 h-[40px] border-[1px] rounded-lg focus:border-pink-200 px-3 focus:border-2 outline-none m-1 "
             placeholder="desc..."
             type="text"
             name="desc"
+            rows={6}
             defaultValue={data.desc}
             onChange={handelChange}
           />

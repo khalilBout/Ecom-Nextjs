@@ -86,6 +86,7 @@ const OrderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  taxDelivery: { type: Number, required: true },
   isProcess: {
     type: Boolean,
     required: true,

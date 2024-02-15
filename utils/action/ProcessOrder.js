@@ -33,9 +33,9 @@ export default function ProcessOrder({ orderID }) {
       onClick={() => {
         handelOrder(orderID);
       }}
-      className="bg-green-300 px-2 py-1 rounded-sm cursor-pointer"
+      className="w-[60px] bg-green-300 px-2 py-1 rounded-md cursor-pointer"
     >
-      Completed
+      Proses
     </button>
   );
 }

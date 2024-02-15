@@ -18,7 +18,6 @@ export const GET = async (request, { params }) => {
 export const DELETE = async (request, { params }) => {
   // امساك رقم تعريف المدونة
   const { id } = params;
-  console.log("id from Order deleted", id);
 
   try {
     await connectDB();
@@ -32,8 +31,8 @@ export const DELETE = async (request, { params }) => {
 
 export const PUT = async (request, { params }) => {
   const { id } = params;
-  const dataOrder = await Order.findById(id);
-
+  // const dataOrder = await Order.findById(id);
+  const dataOrder = await request.json();
   // const { newDataOrder } = await request.json();
   // update order (update value to isProcess  )
   const newOrder = {
@@ -41,7 +40,7 @@ export const PUT = async (request, { params }) => {
     userId: dataOrder.userId,
     userName: dataOrder.userName,
     email: dataOrder.email,
-
+    taxDelivery: dataOrder.taxDelivery,
     orderProduct: dataOrder.orderProduct,
     shippingAddress: dataOrder.shippingAddress,
     isProcess: false,

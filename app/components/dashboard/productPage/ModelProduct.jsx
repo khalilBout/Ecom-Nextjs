@@ -15,7 +15,7 @@ const ModelProduct = ({ caty, setListModels }) => {
   const [selectedColor, setSelectedColor] = useState([]);
   const [url, setUrl] = useState([]);
   const [publicId, setPublicId] = useState([]);
-
+  const [isChanged, setIsChanged] = useState(false);
   const deleteSize = (index) => {
     setSize((prev) => {
       const updateList = [...prev];
@@ -34,7 +34,6 @@ const ModelProduct = ({ caty, setListModels }) => {
     if (size.length === 0 || selectedColor.length === 0) {
       return alert("add size and color of product ");
     }
-    console.log("Data Models:", dataModels);
     setListModels((prev) => [...prev, dataModels]);
     setSize([]);
     setSelectedColor([]);
@@ -59,7 +58,12 @@ const ModelProduct = ({ caty, setListModels }) => {
           </div>
           {/* size  */}
           <div className="my-1 p-1 bg-gray-100 rounded-lg ">
-            <SizeProduct size={size} setSize={setSize} caty={caty} />
+            <SizeProduct
+              size={size}
+              setSize={setSize}
+              caty={caty}
+              setIsChanged={setIsChanged}
+            />
             {/* list of sizes   */}
             {size.length > 0 && (
               <>

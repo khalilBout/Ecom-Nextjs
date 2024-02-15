@@ -14,10 +14,10 @@ const AllOrders = async ({ searchParams }) => {
   const { count, allOrder } = await getOrderByFilter(state, page);
 
   return (
-    <div class="w-full m-4 ">
-      <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-        <div class="flex justify-between mb-4 items-start">
-          <div class="py-2 text-2xl text-gray-600 font-medium">
+    <div className="w-full m-4 ">
+      <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+        <div className="flex justify-between mb-4 items-start">
+          <div className="py-2 text-2xl text-gray-600 font-medium">
             Manage orders
           </div>
         </div>
@@ -25,9 +25,17 @@ const AllOrders = async ({ searchParams }) => {
           <StateSelect />
           <PaginationCom count={count} />
         </div>
-        <div class="overflow-x-auto">
-          <TableOrder allOrder={allOrder} />
-          {/* <Orders data={data} /> */}
+        <div className="overflow-x-auto">
+          {count > 0 ? (
+            <TableOrder allOrder={allOrder} />
+          ) : (
+            <div className="flex justify-center items-center w-full my-2 py-8 bg-slate-200 rounded-md">
+              <p className=" text-2xl font-bodyFont text-red-400">
+                {" "}
+                No Orders...{" "}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

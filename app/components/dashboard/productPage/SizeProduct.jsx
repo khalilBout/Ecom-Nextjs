@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 
 const SizeProduct = ({ size, setSize, caty, setIsChanged }) => {
-  const sizesDeras = ["SM", "MD", "XL", "2XL", "3XL", "4XL"];
-  const sizesCheldren = ["0-6M", "6-12M", "12-18M", "18-24M", "2-3Y", "3-4Y"];
+  const sizesDeras = ["sm", "md", "xl", "2xl", "3xl", "4xl"];
+  const sizesCheldren = ["0-6m", "6-12m", "12-18m", "18-24m", "2-3y", "3-4y"];
 
   const [theSize, setTheSize] = useState("");
   const [stoke, setStoke] = useState("");
