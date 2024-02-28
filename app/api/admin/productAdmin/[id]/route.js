@@ -31,16 +31,8 @@ export const DELETE = async (request, { params }) => {
 
 export const PUT = async (request, { params }) => {
   const { id } = params;
-  const {
-    category,
-    desc,
-    price,
-    priceDrop,
-    title,
-    style,
-    type,
-    modelDataSending,
-  } = await request.json();
+  const { category, desc, price, priceDrop, title, type, modelDataSending } =
+    await request.json();
 
   const finalPrice = price - price * priceDrop * 0.01;
 
@@ -54,7 +46,6 @@ export const PUT = async (request, { params }) => {
       category: category,
       finalPrice: finalPrice,
       listModels: modelDataSending,
-      style: style,
       type: type,
     });
     return new NextResponse("Product updated", { status: 200 });

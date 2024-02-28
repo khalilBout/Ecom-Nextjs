@@ -2,9 +2,7 @@ import React from "react";
 
 const ProductInfo = ({ productInfo }) => {
   // const dispatch = useDispatch();
-  const addToCart = () => {
-    console.log("add to cart from  detail product page ");
-  };
+  const addToCart = () => {};
   return (
     <div className="flex flex-col gap-5">
       <h2 className="text-4xl font-semibold">{productInfo.productName}</h2>

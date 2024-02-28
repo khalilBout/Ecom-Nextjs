@@ -1,11 +1,11 @@
-import React from "react";
-import { ScaleLoader } from "react-spinners";
+"use client";
+import Loading from "@/app/components/Loading/Loading";
 
 const loading = () => {
   return (
-    <div className="w-full h-[600px] flex justify-center items-center">
-      <ScaleLoader color="#d66b36" />
-    </div>
+    <>
+      <Loading />
+    </>
   );
 };
 

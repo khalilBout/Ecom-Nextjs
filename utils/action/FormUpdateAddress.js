@@ -6,7 +6,6 @@ const FormUpdateAddress = ({
   setAddressClient,
   setAddressClientUpdated,
 }) => {
-  // console.log("addressClient for update:", addressClient);
   const [form, setForm] = useState({
     clientName: addressClient.clientName,
     phone: addressClient.phone,

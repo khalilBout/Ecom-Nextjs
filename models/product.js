@@ -37,19 +37,17 @@ const ProductSchema = new mongoose.Schema({
         },
       ],
       selectedColor: { type: String, required: [false] },
-      url: [{ type: String }],
+      url: [
+        {
+          urlImage: { type: String, required: [true] },
+          public_id: { type: String, required: [true] },
+        },
+      ],
     },
   ],
-  style: {
-    type: String,
-    required: [false],
-  },
   type: {
     type: String,
     required: [false],
-    enum: {
-      values: ["New", "Best", "Soled"],
-    },
   },
 
   createdAt: {

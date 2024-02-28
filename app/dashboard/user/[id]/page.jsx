@@ -8,9 +8,6 @@ const page = async ({ params }) => {
   const { AllOrders } = await getAllOrderOfUser(id);
   const user = await getUserFromAdmin(id);
 
-  console.log("All Orders:", AllOrders);
-  // console.log("the user:", data);
-
   return (
     <>
       <div className="w-full mx-4 my-2">

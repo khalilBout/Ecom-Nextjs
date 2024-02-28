@@ -60,7 +60,6 @@ const OrderUpdate = ({ order }) => {
     orderProduct: modelData,
   };
   const handelUpdateOrder = async () => {
-    // console.log("newOrderData", newOrderData);
     setLaudingSend(true);
     const id = order?._id;
     try {

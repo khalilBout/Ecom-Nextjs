@@ -5,7 +5,6 @@ const getAdminUsers = async (token) => {
     if (token && token !== "") {
       const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
       //   const isAdmin = decodedToken.isAdmin;
-      console.log("isAdmin****", decodedToken);
       //   return isAdmin;
     } else {
       return { message: "you are not Admin!!" };

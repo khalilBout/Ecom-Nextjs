@@ -46,7 +46,7 @@ const Product = ({ product }) => {
                 fill
                 objectFit="cover"
                 objectPosition="center"
-                src={allImages[0]}
+                src={allImages[0].urlImage}
                 alt="FirstImage"
               />
             </div>
@@ -65,7 +65,7 @@ const Product = ({ product }) => {
             </>
           ) : (
             <div className="bg-gray-50 rounded-md w-[92px] h-[35px] text-primeColor flex justify-center items-center text-base font-semibold hover:bg-black duration-300 cursor-pointer">
-              {product.style}
+              {product.type}
             </div>
           )}
         </div>

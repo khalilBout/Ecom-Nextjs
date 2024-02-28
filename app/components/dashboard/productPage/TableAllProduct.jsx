@@ -1,3 +1,4 @@
+"";
 import React from "react";
 import productNoImg from "@/public/productNoImg.png";
 import Image from "next/image";
@@ -72,7 +73,7 @@ function Tr({ item }) {
 
   return (
     <>
-      <tr>
+      <tr className="bg-red-100">
         {/* Image  */}
         <td className="py-2 px-4 border-b border-b-gray-50 ">
           <div className="relative h-[60px] w-[60px]">
@@ -81,9 +82,9 @@ function Tr({ item }) {
               quality={100}
               objectFit="cover"
               objectPosition="center"
-              src={listModels[0].url[0] || productNoImg}
+              src={listModels[0].url[0].urlImage || productNoImg}
               alt={title}
-              className="rounded-full object-cover overflow-hidden bg-teal-400"
+              className="rounded-full object-cover overflow-hidden bg-teal-100"
               // className="text-gray-600 text-sm font-medium hover:text-blue-500 ml-2 truncate"
             />
           </div>
@@ -91,23 +92,23 @@ function Tr({ item }) {
 
         {/* name of product  */}
         <td className="py-2 px-4 border-b border-b-gray-50">
-          <span className="text-[14px] font-medium text-gray-600">{title}</span>
+          <span className="text-[16px] font-medium text-gray-800">{title}</span>
         </td>
         {/* Price of product  */}
         <td className="py-2 px-4 border-b border-b-gray-50">
-          <span className="text-[14px] font-medium text-gray-600">
+          <span className="text-[16px] font-medium text-gray-800">
             {price} $
           </span>
         </td>
         {/* Price Drop of product  */}
         <td className="py-2 px-4 border-b border-b-gray-50">
-          <span className="text-[13px] font-medium text-gray-400">
+          <span className="text-[14px] font-medium text-gray-700">
             {priceDrop} %
           </span>
         </td>
         {/*category of product  */}
         <td className="py-2 px-4 border-b border-b-gray-50">
-          <span className="text-[13px] font-medium text-gray-400">
+          <span className="text-[15px] font-medium text-gray-600">
             {category}
           </span>
         </td>
@@ -115,7 +116,7 @@ function Tr({ item }) {
 
         <td className="py-2 px-4 border-b border-b-gray-50">
           {listModels?.map((item, index) => (
-            <div key={index} className="flex gap-1 justify-start items-center">
+            <span key={index} className="flex gap-1 justify-start items-center">
               <span
                 className={`border border-gray-400 mx-2 w-[20px] h-[20px] rounded-full bg-[${item?.selectedColor}]`}
                 style={{
@@ -135,14 +136,14 @@ function Tr({ item }) {
                   </span>
                 ))}
               </span>
-            </div>
+            </span>
           ))}
         </td>
 
         {/* Actions  */}
 
         <td className="py-2 px-4 border-b border-b-gray-50">
-          <div className="flex gap-1">
+          <span className="flex gap-1">
             <Link
               href={`/dashboard/products/updateProduct/${_id}`}
               className="cursor-pointer"
@@ -150,7 +151,7 @@ function Tr({ item }) {
               <BiEdit size={20} color={"rgb(34,197,94)"}></BiEdit>
             </Link>
             <BtnDelete url={`/admin/productAdmin/${_id}`} />
-          </div>
+          </span>
         </td>
       </tr>
     </>

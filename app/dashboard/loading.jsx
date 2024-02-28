@@ -1,7 +1,12 @@
-import React from "react";
+"use client";
+import Loading from "@/app/components/Loading/Loading";
 
 const loading = () => {
-  return <div>loading dashbord...</div>;
+  return (
+    <>
+      <Loading />
+    </>
+  );
 };
 
 export default loading;

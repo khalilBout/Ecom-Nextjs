@@ -61,6 +61,7 @@ const ColorProduct = ({ selectedColor, setSelectedColor, setIsChanged }) => {
             onChange={(color) => {
               setSelectedColor(color.hex);
               setColor(color.hex);
+              setIsChanged(true);
             }}
           />
         )}

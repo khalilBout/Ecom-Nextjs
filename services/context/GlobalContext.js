@@ -137,7 +137,6 @@ export default function GlobalState({ children }) {
   const token = Cookies.get("token");
   const userData = async () => {
     const res = await getUser();
-    console.log("res from context:", res);
 
     if (res.status === 200) {
       const userInfo = res.data;

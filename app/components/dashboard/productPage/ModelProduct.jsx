@@ -1,20 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
-import { HiOutlineTrash } from "react-icons/hi";
 
 // components
 import SizeProduct from "@/app/components/dashboard/productPage/SizeProduct";
 import ColorProduct from "@/app/components/dashboard/productPage/ColorProduct";
-// import UploadImage from "./UploadImage";
-import UploadImage from "./UploadImage";
+import AddImageProduct from "@/app/components/dashboard/productPage/AddImageProduct";
+import { HiOutlineTrash } from "react-icons/hi";
 
 const ModelProduct = ({ caty, setListModels }) => {
   // data of product
   const [size, setSize] = useState([]);
   const [selectedColor, setSelectedColor] = useState([]);
   const [url, setUrl] = useState([]);
-  const [publicId, setPublicId] = useState([]);
+  // const [publicId, setPublicId] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
   const deleteSize = (index) => {
     setSize((prev) => {
@@ -38,7 +36,6 @@ const ModelProduct = ({ caty, setListModels }) => {
     setSize([]);
     setSelectedColor([]);
     setUrl([]);
-    setPublicId([]);
   };
 
   return (
@@ -52,6 +49,7 @@ const ModelProduct = ({ caty, setListModels }) => {
           {/* colors  */}
           <div className=" p-2 bg-gray-100 rounded-lg ">
             <ColorProduct
+              setIsChanged={setIsChanged}
               selectedColor={selectedColor}
               setSelectedColor={setSelectedColor}
             />
@@ -67,23 +65,23 @@ const ModelProduct = ({ caty, setListModels }) => {
             {/* list of sizes   */}
             {size.length > 0 && (
               <>
-                <hr className="border-1 border-red-800" />
+                <hr border="true" className="bg-red-800" />
                 <div className="flex gap-2 m-2">
                   {size.map((item, index) => (
                     <div
                       key={index}
-                      className="flex items-center bg-red-100 h-[25px] px-2 py-1 rounded-lg cursor-pointer"
+                      className="flex items-center bg-red-00 h-[25px] px-2 py-1 rounded-lg cursor-pointer"
                     >
                       <p className="text-[16px] font-medium">{item.theSize}:</p>
-                      <h3 className="text-[14px] text-black max-w-[30px] mx-1 bg-red-100">
+                      <h3 className="text-[14px] text-black max-w-[30px] mx-1 ">
                         {item.stoke}
                       </h3>
-                      <button
-                        className="p-1 hover:bg-red-400 rounded-full cursor-pointer"
+                      <div
+                        className="p-1 hover:bg-red-400 rounded-full cursor-pointer bg-red-200"
                         onClick={() => deleteSize(item._id)}
                       >
                         <HiOutlineTrash size={18} />
-                      </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -94,37 +92,8 @@ const ModelProduct = ({ caty, setListModels }) => {
         {/* images and btn add models  */}
         <div className="flex flex-col justify-between ">
           {/* images  */}
-          <div className="h-[150px] rounded-md m-1 flex gap-2">
-            {url.length > 0 && (
-              <div className=" bg-blue-100">
-                <div className="flex gap-2">
-                  {url.map((item, index) => (
-                    <div
-                      className=" w-[130px] h-full flex justify-center items-center rounded-lg"
-                      key={index}
-                    >
-                      <Image
-                        width={130}
-                        height={150}
-                        style={{ objectFit: "contain" }}
-                        src={item}
-                        alt={item}
-                        className="rounded-lg w-[130px] h-[150px]"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            <div className="w-[110px] h-full">
-              <UploadImage
-                url={url}
-                setUrl={setUrl}
-                publicId={publicId}
-                setPublicId={setPublicId}
-              />
-            </div>
-          </div>
+          <AddImageProduct url={url} setUrl={setUrl} />
+
           {/* btn add Model  */}
           <div className="p-1">
             <button

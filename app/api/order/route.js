@@ -52,7 +52,6 @@ export const POST = async (request) => {
     totolPyment,
     taxDelivery,
   };
-  // console.log("order data from api:", dataOrder);
   try {
     await connectDB();
     await Order.create(dataOrder);

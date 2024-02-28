@@ -11,6 +11,7 @@ import { emptyCart } from "@/public/images/index";
 const CardData = () => {
   const [showCard, setShowCard] = useState(false);
   const cart = useSelector((state) => state.Cart.cartProducts);
+
   return (
     <>
       <div>

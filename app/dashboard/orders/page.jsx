@@ -31,8 +31,7 @@ const AllOrders = async ({ searchParams }) => {
           ) : (
             <div className="flex justify-center items-center w-full my-2 py-8 bg-slate-200 rounded-md">
               <p className=" text-2xl font-bodyFont text-red-400">
-                {" "}
-                No Orders...{" "}
+                No Orders ...
               </p>
             </div>
           )}

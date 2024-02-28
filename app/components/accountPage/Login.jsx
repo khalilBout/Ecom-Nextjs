@@ -6,9 +6,6 @@ import { getProviders, signIn, useSession } from "next-auth/react";
 
 const Login = () => {
   const session = useSession();
-  console.log("session:", session);
-
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [email, setEmail] = useState("");
@@ -61,7 +58,6 @@ const Login = () => {
         });
 
         // if (response.status === 200) {
-        //   console.log("user login.");
         //   // toast.success("Login success");
         //   setEmail("");
         //   setPassword("");
@@ -76,7 +72,6 @@ const Login = () => {
         //   setPassword("");
         // }
       } catch (error) {
-        console.log("Login failed", error);
         setErrorMsg("Error Login:", error);
 
         // toast.error(error.message);

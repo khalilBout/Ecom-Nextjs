@@ -1,14 +1,18 @@
 "use client";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const SizeProduct = ({ size, setSize, caty, setIsChanged }) => {
   const sizesDeras = ["sm", "md", "xl", "2xl", "3xl", "4xl"];
   const sizesCheldren = ["0-6m", "6-12m", "12-18m", "18-24m", "2-3y", "3-4y"];
 
   const [theSize, setTheSize] = useState("");
-  const [stoke, setStoke] = useState("");
+  const [stoke, setStoke] = useState(0);
 
   const handelStoke = (e) => {
+    if (e.target.value <= 0) {
+      toast.error("must be more then 00 ");
+    }
     setStoke(e.target.value);
     setIsChanged(true);
   };
@@ -25,7 +29,7 @@ const SizeProduct = ({ size, setSize, caty, setIsChanged }) => {
     stoke,
   };
   const handelAddSize = (e) => {
-    if (theSize === "" || stoke === "") {
+    if (theSize === "" || stoke === "" || +stoke <= 0) {
       return alert("add size and num of pice ! ");
     }
     setSize((prev) => [...prev, dataSize]);
@@ -44,7 +48,7 @@ const SizeProduct = ({ size, setSize, caty, setIsChanged }) => {
               ${theSize === item ? "bg-gray-500 text-white" : ""}`}
               onClick={() => handleSize(item)}
             >
-              {item}
+              {item.toUpperCase()}
             </button>
           ))}
         </div>
@@ -57,7 +61,7 @@ const SizeProduct = ({ size, setSize, caty, setIsChanged }) => {
                 ${theSize === item ? "bg-gray-500 text-white" : ""}`}
               onClick={() => handleSize(item)}
             >
-              {item}
+              {item.toUpperCase()}
             </button>
           ))}
         </div>

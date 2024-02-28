@@ -4,6 +4,7 @@ import { HiOutlineTrash } from "react-icons/hi";
 import SizeProduct from "./SizeProduct";
 import UploadImage from "./UploadImage";
 import ColorProduct from "./ColorProduct";
+import toast from "react-hot-toast";
 
 const UpdateModel = ({
   models,
@@ -34,15 +35,7 @@ const UpdateModel = ({
     setModelChanged([...list, NewDataModel]);
     setIsChanged(false);
   };
-  // useEffect(() => {
-  //   if (isChanged == true) {
-  //     setIsModelChangedForGlobalState(true);
-  //   } else {
-  //     setIsModelChangedForGlobalState(false);
-  //   }
-  // }, [isChanged]);
 
-  // delete size
   const deleteSize = (id) => {
     const sizeDeleted = size?.find((x) => x._id === id);
     const newListSize = size?.filter((x) => x !== sizeDeleted);
@@ -51,23 +44,26 @@ const UpdateModel = ({
   };
   // handel Update Size
   const handelUpdateSize = (e) => {
-    const newList = [];
-    size?.map((x) => {
-      if (x._id === e.target.id) {
-        const newSize = {
-          _id: x._id,
-          theSize: x.theSize,
-          stoke: e.target.value,
-        };
-        return newList.push(newSize);
-      }
-      newList.push(x);
-    });
-    setSize(newList);
-    setIsChanged(true);
+    if (e.target.value > 0) {
+      const newList = [];
+      size?.map((x) => {
+        if (x._id === e.target.id) {
+          const newSize = {
+            _id: x._id,
+            theSize: x.theSize,
+            stoke: e.target.value,
+          };
+          return newList.push(newSize);
+        }
+        newList.push(x);
+      });
+      setSize(newList);
+      setIsChanged(true);
+    } else {
+      toast.error("must be more then 0 .");
+    }
   };
 
-  // console.log("global state from chedren:", isModelChangedForGlobalState);
   return (
     <>
       <div className=" p-2 rounded-md bg-blue-50 flex gap-2 flex-col mdl:flex-row justify-between">
@@ -143,7 +139,7 @@ const UpdateModel = ({
                     fill
                     objectFit="cover"
                     objectPosition="center"
-                    src={item}
+                    src={item.urlImage}
                     alt={`image${i}`}
                     className="rounded-md"
                     // width={90}
@@ -163,8 +159,8 @@ const UpdateModel = ({
               <UploadImage
                 url={url}
                 setUrl={setUrl}
-                publicId={publicId}
-                setPublicId={setPublicId}
+                // publicId={publicId}
+                // setPublicId={setPublicId}
               />
             </div>
           </div>

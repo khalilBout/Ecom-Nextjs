@@ -1,16 +1,23 @@
 import React from "react";
 import { CldUploadButton } from "next-cloudinary";
 
-const UploadImage = ({ setUrl, setPublicId }) => {
+const UploadImage = ({ setUrl }) => {
   const handelUpload = (result) => {
     const info = result.info;
-    const publicId = result.public_id;
+    // const publicId = result.public_id;
     if ("secure_url" in info && "public_id" in info) {
       // data of image
       const urlImage = info.secure_url;
       const public_id = info.public_id;
-      setUrl((prev) => [...prev, urlImage]);
-      setPublicId((prev) => [...prev, public_id]);
+
+      setUrl((prev) => [
+        ...prev,
+        {
+          urlImage,
+          public_id,
+        },
+      ]);
+      // setPublicId((prev) => [...prev, public_id]);
     }
   };
   return (

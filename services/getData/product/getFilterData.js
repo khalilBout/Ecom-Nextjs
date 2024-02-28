@@ -28,7 +28,6 @@ export const getProducts = async (search, page, category) => {
       })
         .limit(ITEM_PER_PAGE)
         .skip(ITEM_PER_PAGE * (page - 1));
-      console.log("data from fan", count, allProducts);
       return { count, allProducts };
     }
   } catch (err) {

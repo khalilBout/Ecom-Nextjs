@@ -49,7 +49,7 @@ const ImageGallery = ({ product }) => {
                   ? "border-[1px] border-purple-500"
                   : "border-[1px] border-purple-200"
               }`}
-              src={url}
+              src={url.urlImage}
               // width={70}
               // height={70}
               fill
@@ -75,7 +75,7 @@ const ImageGallery = ({ product }) => {
         ) : (
           <div className="border-[1px] border-purple-200  relative w-[300px] h-[450px]">
             <Image
-              src={displayImage[selectedImage]}
+              src={displayImage[selectedImage].urlImage}
               alt={product.title}
               quality={100}
               fill

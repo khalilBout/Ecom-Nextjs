@@ -52,8 +52,8 @@ export default function ProductDetails({ product }) {
                   <p className="text-sm text-purple-500">{product.category}</p>
                 </div>
                 <div>
-                  <h3 className="font-medium">Dress Style</h3>
-                  <p className="text-sm text-purple-500">{product.style}</p>
+                  <h3 className="font-medium ">Dress Style</h3>
+                  <p className="text-sm text-purple-500">{product.type}</p>
                 </div>
               </div>
 
@@ -65,17 +65,15 @@ export default function ProductDetails({ product }) {
                 </p>
               </div>
             </div>
-            <div className="hidden mdl:flex justify-end relative items-center h-full w-4/10">
+            <div className="hidden mdl:flex justify-end relative items-center h-full w-[500px] bg-red-400">
               <Image
-                src={allImages[0]}
-                width={400}
-                height={700}
-                className=" rounded-lg object-cover"
+                fill
+                objectFit="cover"
+                objectPosition="center"
+                src={allImages[0].urlImage}
+                className="bg-red-200 "
                 alt="image of product"
               />
-              <span className="bg-primeColor px-2 py-1 rounded-lg text-sm absolute bottom-6 right-2 text-white font-medium">
-                {product.title}
-              </span>
             </div>
           </div>
         )}

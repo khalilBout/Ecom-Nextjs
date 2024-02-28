@@ -26,7 +26,7 @@ const AddToCart = ({ product }) => {
   const idModel = currentModel?._id;
   const titleProduct = product?.title;
   const price = product?.price;
-  const imageModel = currentModel?.url[0];
+  const imageModel = currentModel?.url[0].urlImage;
   const listSizeCurrent = currentModel?.size;
   const finalPrice = product?.finalPrice;
 

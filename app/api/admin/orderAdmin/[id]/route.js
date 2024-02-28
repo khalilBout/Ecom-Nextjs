@@ -71,11 +71,13 @@ export const PUT = async (request, { params }) => {
         i.size.map((x) => {
           if (x.theSize === sizeOfOrder) {
             const newStoke = x.stoke - quantity;
-            newSize.push({
-              _id: x._id,
-              theSize: x.theSize,
-              stoke: newStoke,
-            });
+            if (newStoke > 0) {
+              newSize.push({
+                _id: x._id,
+                theSize: x.theSize,
+                stoke: newStoke,
+              });
+            }
           } else {
             newSize.push(x);
           }

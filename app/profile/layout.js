@@ -5,20 +5,20 @@ import Sidebar from "../components/profilePage/Sidebar";
 export default function profileLayout({ children }) {
   return (
     <>
-      <section className="py-5 sm:py-7 bg-blue-100">
-        <div className="container max-w-screen-xl mx-auto px-4">
+      <section className="py-1 sm:py-2 bg-blue-100">
+        <div className="container max-w-screen-xl mx-auto px-2">
           <h1 className="text-bold text-2xl">User Profile</h1>
         </div>
       </section>
 
-      <section className="py-10">
+      <section className="py-2">
         <div className="container max-w-screen-xl mx-auto px-4">
           <div className="flex flex-col md:flex-row -mx-4">
             <Sidebar />
-            <main className="md:w-2/3 lg:w-3/4 px-4">
-              <article className="border border-gray-200 bg-white shadow-sm rounded mb-5 p-3 lg:p-5">
+            <main className="grow px-2">
+              <div className="w-full rounded p-2 border border-gray-200  ">
                 {children}
-              </article>
+              </div>
             </main>
           </div>
         </div>

@@ -4,13 +4,14 @@ import FormAddProduct from "@/utils/action/FormAddProduct";
 import ModelProduct from "@/app/components/dashboard/productPage/ModelProduct";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/components/Loading/Loading";
+// import toast from "react-hot-toast";
 
 const Page = () => {
   const router = useRouter();
   const [form, setForm] = useState({
     title: "",
     desc: "",
-    style: "",
     type: "",
     price: 0,
     priceDrop: 0,
@@ -43,10 +44,10 @@ const Page = () => {
       // const data = await res.json();
       if (res.status === 201) {
         setPending(false);
+        // toast.success("Product added ..");
         setForm({
           title: "",
           desc: "",
-          style: "",
           type: "",
           price: 0,
           priceDrop: 0,
@@ -65,7 +66,7 @@ const Page = () => {
   return (
     <div className="w-full bg-slate-200">
       {pending ? (
-        <> add product ...</>
+        <Loading />
       ) : (
         <>
           <h1 className="my-3 text-xl md:text-3xl font-semibold text-black mb-8">
@@ -84,8 +85,8 @@ const Page = () => {
 
             {listModels && listModels.length > 0 ? (
               <>
-                <hr className=" border-1 border-red-900" />
-                <div className="flex gap-2 bg-blue-100">
+                <hr className=" bg-red-900" />
+                <div className="flex gap-2 bg-blue-100 ">
                   {listModels?.map((item, index) => (
                     <div
                       key={index}
@@ -93,18 +94,21 @@ const Page = () => {
                     >
                       <div className="my-1 mr-2 bg-slate-50 rounded-md">
                         <Image
-                          src={item.url[0]}
+                          src={item.url[0].urlImage}
                           width={100}
-                          height={130}
+                          height={145}
                           alt={item.selectedColor}
-                          className="rounded-md"
+                          className="rounded-md bg-red-200"
                         />
                       </div>
                       <div className="my-1">
                         <div className="">
                           <h3 className="text-[14px] ">Size</h3>
-                          {item?.size.map((x) => (
-                            <div className="flex justify-start items-center">
+                          {item?.size.map((x, index) => (
+                            <div
+                              key={index}
+                              className="flex justify-start items-center"
+                            >
                               <p className="w-[35px] font-bold px-2 text-[13px] text-red-500">
                                 {x.theSize}:
                               </p>

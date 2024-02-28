@@ -3,10 +3,6 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
-    // console.log(req.nextUrl.pathname);
-    // console.log(req.nextauth.token.role);
-    // console.log("token:", req.nextauth.token);
-
     if (
       req.nextUrl.pathname.startsWith("/dashboard") &&
       req.nextauth.token.role != "admin"
@@ -61,8 +57,6 @@ export const config = {
 //   }
 //   if (isAdmin && token) {
 //     // const data = await getAdminUsers(token);
-
-//     // console.log("data from midd:", data);
 //     return NextResponse.next();
 //   }
 // }

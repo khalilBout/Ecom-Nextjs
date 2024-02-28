@@ -5,6 +5,8 @@ import SortBy from "@/app/components/shopPage/uiShop/SortBy";
 import SearchNav from "@/app/components/navbar/SearchNav";
 
 import { getProducts } from "@/services/getData/product/getFilterData";
+import Image from "next/image";
+import NoProduct from "@/public/images/emptyCart.png";
 
 const page = async ({ searchParams }) => {
   const search = searchParams?.search || "";
@@ -25,7 +27,18 @@ const page = async ({ searchParams }) => {
             <div className="w-full flex flex-col md:flex-row md:items-center justify-between mt-2">
               <PaginationCom count={count} />
             </div>
-            <DisplayProduct allProducts={allProducts} count={count} />
+            {count > 0 ? (
+              <DisplayProduct allProducts={allProducts} count={count} />
+            ) : (
+              <div className="w-full flex justify-center items-center">
+                <Image
+                  width={320}
+                  height={180}
+                  src={NoProduct}
+                  alt="noProduct"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -82,9 +82,7 @@ const Register = () => {
             },
             body: JSON.stringify(user),
           });
-          console.log("response:", response);
           if (response.status === 400) {
-            console.log("email exist..");
             setName("");
             setEmail("");
             setPassword("");

@@ -28,7 +28,11 @@ const ProductItem = ({ product }) => {
       }}
       className="max-w-[600px] h-28 bg-gray-100 mb-3 flex items-center gap-3"
     >
-      <img className="w-24" src={product.allImages[0]} alt="productImg" />
+      <img
+        className="w-24"
+        src={product.allImages[0].urlImage}
+        alt="productImg"
+      />
       <div className="flex flex-col gap-1">
         <p className="font-semibold text-lg">{product.title}</p>
         <p className="text-xs">{product.desc}</p>

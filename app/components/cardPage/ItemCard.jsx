@@ -20,7 +20,6 @@ const ItemCard = ({ item }) => {
     Color,
     sizeSelectStoke,
   } = item;
-
   return (
     <>
       <div
