@@ -7,6 +7,7 @@ import PaginationCom from "@/app/components/shopPage/uiShop/PaginationCom";
 
 // images
 import NoProduct from "@/public/images/emptyCart.png";
+import Image from "next/image";
 
 const pageProduct = async ({ searchParams }) => {
   const search = searchParams?.search || "";
