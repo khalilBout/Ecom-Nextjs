@@ -2,8 +2,9 @@ import React from "react";
 import Link from "next/link";
 import BtnDelete from "@/utils/action/BtnDelete";
 import ProcessOrder from "@/utils/action/ProcessOrder";
-import { GrUpdate } from "react-icons/Gr";
-import { AiOutlineCloudUpload } from "react-icons/Ai";
+// import { GrUpdate } from "react-icons/Gr";
+import { GrUpdate } from "react-icons/gr";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 
 const Orders = ({ data }) => {
   return (

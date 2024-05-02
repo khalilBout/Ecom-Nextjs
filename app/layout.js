@@ -4,7 +4,7 @@ import "./globals.css";
 
 import Navbar from "@/app/components/navbar/Navbar";
 import GlobalState from "@/services/context/GlobalContext";
-import Footer from "@/app/components/footer/Footer";
+import Footer from "@/app/components/Footer/Footer";
 import AuthProvider from "@/app/components/AuthProvider/AuthProvider";
 import ReduxProv from "@/app/components/ReduxProv";
 import { Toaster } from "react-hot-toast";

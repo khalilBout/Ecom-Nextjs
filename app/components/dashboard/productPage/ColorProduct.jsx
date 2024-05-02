@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import ColorPicker from "react-pick-color";
-import { GrAdd } from "react-icons/Gr";
+import { GrAdd } from "react-icons/gr";
+// import { GrAdd } from "react-icons/gr";
+// import { GrUpdate } from "react-icons/gr";
+
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const ColorProduct = ({ selectedColor, setSelectedColor, setIsChanged }) => {

@@ -1,6 +1,6 @@
 "use client";
 import { MdOutlineNavigateNext } from "react-icons/md";
-import { GrFormPrevious } from "react-icons/Gr";
+import { GrFormPrevious } from "react-icons/gr";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const PaginationCom = ({ count }) => {
