@@ -1,6 +1,6 @@
 import React from "react";
 import Register from "@/app/components/accountPage/Register";
-import Access from "@/app/components/accountPage/access";
+import Access from "@/app/components/accountPage/Access";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Login from "@/app/components/accountPage/Login";
 import React from "react";
-import Access from "@/app/components/accountPage/access";
+import Access from "@/app/components/accountPage/Access";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
