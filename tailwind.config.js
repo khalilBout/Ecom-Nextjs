@@ -35,6 +35,11 @@ module.exports = {
       boxShadow: {
         testShadow: "0px 0px 54px -13px rgba(0,0,0,0.7)",
       },
+      backgroundImage: {
+        "hero-1": "url('/images/banner/man3.png')",
+        // 'hero-2': "url('/img/hero-pattern.svg')",
+        // 'hero-3': "url('/img/hero-pattern.svg')",
+      },
     },
   },
   plugins: [],

@@ -2,9 +2,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { saleImgOne } from "@/public/images/index";
-import { saleImgTwo } from "@/public/images/index";
-import { saleImgThree } from "@/public/images/index";
+import { sale1 } from "@/public/images/index";
+import { sale2 } from "@/public/images/index";
+import { sale3 } from "@/public/images/index";
 
 const Sale = () => {
   return (
@@ -13,7 +13,7 @@ const Sale = () => {
         <Link href="/shop">
           <Image
             className="h-full w-full object-cover"
-            src={saleImgOne}
+            src={sale1}
             alt="saleImgOne"
           />
         </Link>
@@ -23,7 +23,7 @@ const Sale = () => {
           <Link href="/shop">
             <Image
               className="h-full w-full object-cover"
-              src={saleImgTwo}
+              src={sale2}
               alt="saleImgTwo"
             />
           </Link>
@@ -32,7 +32,7 @@ const Sale = () => {
           <Link href="/shop">
             <Image
               className="h-full w-full object-cover"
-              src={saleImgThree}
+              src={sale3}
               alt="saleImgThree"
             />
           </Link>

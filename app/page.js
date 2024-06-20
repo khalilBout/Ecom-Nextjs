@@ -6,6 +6,10 @@ import Sale from "./components/homePage/Sale";
 import NewProducts from "./components/homePage/NewProducts";
 import YearProduct from "./components/homePage/YearProduct";
 
+import man from "@/public/images/banner/man3.png";
+import Link from "next/link";
+import Image from "next/image";
+
 export default async function Home() {
   return (
     <>
@@ -15,6 +19,7 @@ export default async function Home() {
         <Sale />
         <NewArrivals />
         <BestSellers />
+
         {/* <YearProduct /> */}
         <NewProducts />
       </div>

@@ -3,9 +3,17 @@ import logoLight from "./logoLight.png";
 import bannerImgOne from "./banner/bannerImgOne.webp";
 import bannerImgTwo from "./banner/bannerImgTwo.webp";
 import bannerImgThree from "./banner/bannerImgThree.webp";
+
+// ================== sale Img ===================
 import saleImgOne from "./sale/saleImgOne.webp";
 import saleImgTwo from "./sale/saleImgTwo.webp";
 import saleImgThree from "./sale/saleImgThree.webp";
+
+// ================== sale Img ===================
+import sale1 from "./sale/catyC1.png";
+import sale2 from "./sale/catyC2.png";
+import sale3 from "./sale/catyC3.png";
+
 // ============== Products Start here ====================
 // New Arrivals
 import newArrOne from "./products/newArrival/newArrOne.webp";
@@ -13,11 +21,18 @@ import newArrTwo from "./products/newArrival/newArrTwo.webp";
 import newArrThree from "./products/newArrival/newArrThree.webp";
 import newArrFour from "./products/newArrival/newArrFour.webp";
 
+// hero section
+import CatyOne from "@/public/images/banner/man3.png";
+import CatyTow from "@/public/images/banner/woman3.png";
+import CatyThere from "@/public/images/banner/chld.png";
+
 // Best Sellers
 import bestSellerOne from "./products/bestSeller/bestSellerOne.webp";
 import bestSellerTwo from "./products/bestSeller/bestSellerTwo.webp";
 import bestSellerThree from "./products/bestSeller/bestSellerThree.webp";
 import bestSellerFour from "./products/bestSeller/bestSellerFour.webp";
+
+// sale
 
 // Special Offers
 import spfOne from "./products/specialOffer/spfOne.webp";
@@ -40,6 +55,16 @@ export {
   saleImgOne,
   saleImgTwo,
   saleImgThree,
+
+  // hero
+  CatyOne,
+  CatyTow,
+  CatyThere,
+
+  // sale
+  sale1,
+  sale2,
+  sale3,
   // ===================== Products start here ============
   // New Arrivals
   newArrOne,

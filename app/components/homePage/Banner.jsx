@@ -2,11 +2,20 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
+// import { man } from "@/public/images/banner/man3.png";
 
 // images
-import { bannerImgOne } from "@/public/images/index";
-import { bannerImgTwo } from "@/public/images/index";
-import { bannerImgThree } from "@/public/images/index";
+// import { bannerImgOne } from "@/public/images/index";
+// import { bannerImgTwo } from "@/public/images/index";
+// import { bannerImgThree } from "@/public/images/index";
+
+import { CatyOne } from "@/public/images/index";
+import { CatyTow } from "@/public/images/index";
+import { CatyThere } from "@/public/images/index";
+
+import chld from "@/public/images/banner/woman.png";
+import woman from "@/public/images/banner/woman.png";
+
 import Link from "next/link";
 
 const Banner = () => {
@@ -102,21 +111,113 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full">
       <Slider {...settings}>
-        <Link href="/shop">
-          <div>
-            <Image src={bannerImgOne} alt="bannerImgOne" />
+        <Link
+          href="/shop?category=man"
+          className="bg-gradient-to-r from-violet-500/5 to-fuchsia-500/20"
+        >
+          <div className="px-[36px] sml:px-[84px] mdl:px-[120px] lg:px-[160px] h-[360px] w-full flex justify-between items-center gap-4">
+            {/* text side  */}
+            <div className="max-mdl:bg-[url('/images/banner/man3.png')] max-mdl:bg-cover max-mdl:bg-right-top w-full h-full mdl:w-2/5 flex flex-col justify-center gap-4">
+              <h1 className="text-2xl sml:text-3xl mdl:text-4xl font-mono text-gray-950 ">
+                Men's Fashion
+              </h1>
+              <p className=" bg-gradient-to-r from-gray-200/5 to-gray-200/10 text-[14px] max-w-[360px] text-gray-900 px-2 py-1 rounded-2xl">
+                Discover fresh, stylish looks with our exclusive summer sale.
+                Enjoy up to 50% off on select men's clothing. Upgrade your
+                wardrobe today!
+              </p>
+              <button className="py-1 rounded-full bg-black max-w-[180px] text-white font-semibold cursor-pointer text-[14px]">
+                {/* <Link href="/shop" className="px-4 py-2"> */}
+                Shoping Now
+                {/* </Link> */}
+              </button>
+            </div>
+            <div className=" hidden mdl:flex w-3/5 h-full  justify-center items-center">
+              <Image
+                src={CatyOne}
+                alt="bannerImgTwo"
+                width={500}
+                height={500}
+                quality={100}
+                // sizes="max-width: 480px"
+                // fill={true}
+              />
+            </div>
+            {/* <img src= alt="aa" className="w-16 h-16" /> */}
           </div>
         </Link>
-        <Link href="/shop">
-          <div>
-            <Image src={bannerImgTwo} alt="bannerImgTwo" />
+
+        <Link
+          href="/shop?category=woman"
+          className="bg-gradient-to-r from-violet-500/5 to-fuchsia-500/20"
+        >
+          <div className="px-[36px] sml:px-[84px] mdl:px-[120px] lg:px-[160px] h-[360px] w-full flex justify-between items-center gap-4">
+            {/* text side  */}
+            <div className="max-mdl:bg-[url('/images/banner/man3.png')] max-mdl:bg-cover max-mdl:bg-right-top w-full h-full mdl:w-2/5 flex flex-col justify-center gap-4">
+              <h1 className="text-2xl sml:text-3xl mdl:text-4xl font-mono text-gray-950 ">
+                Women's Fashion Sale
+              </h1>
+              <p className=" bg-gradient-to-r from-gray-200/5 to-gray-200/10 text-[14px] max-w-[360px] text-gray-900 px-2 py-1 rounded-2xl">
+                Revamp your summer wardrobe with our chic collection. Enjoy up
+                to 50% off on select women's clothing. Shop the latest trends
+                now!
+              </p>
+              <button className="py-1 rounded-full bg-black max-w-[180px] text-white font-semibold cursor-pointer text-[14px]">
+                {/* <Link href="/shop" className="px-4 py-2"> */}
+                Shoping Now
+                {/* </Link> */}
+              </button>
+            </div>
+            <div className=" hidden mdl:flex w-3/5 h-full  justify-center items-center">
+              <Image
+                src={CatyTow}
+                alt="bannerImgTwo"
+                width={500}
+                height={500}
+                quality={100}
+                // sizes="max-width: 480px"
+                // fill={true}
+              />
+            </div>
+            {/* <img src= alt="aa" className="w-16 h-16" /> */}
           </div>
         </Link>
-        <Link href="/shop">
-          <div>
-            <Image src={bannerImgThree} alt="bannerImgThree" />
+
+        <Link
+          href="/shop?category=children"
+          className="bg-gradient-to-r from-violet-500/5 to-fuchsia-500/20"
+        >
+          <div className="px-[36px] sml:px-[84px] mdl:px-[120px] lg:px-[160px] h-[360px] w-full flex justify-between items-center gap-4">
+            {/* text side  */}
+            <div className="max-mdl:bg-[url('/images/banner/man3.png')] max-mdl:bg-cover max-mdl:bg-right-top w-full h-full mdl:w-2/5 flex flex-col justify-center gap-4">
+              <h1 className="text-2xl sml:text-3xl mdl:text-4xl font-mono text-gray-950 ">
+                Kids' Summer Sale
+              </h1>
+              <p className=" bg-gradient-to-r from-gray-200/5 to-gray-200/10 text-[14px] max-w-[360px] text-gray-900 px-2 py-1 rounded-2xl">
+                Brighten up your child's wardrobe with our summer collection.
+                Enjoy up to 50% off on select children's clothing. Shop playful
+                styles today!
+              </p>
+              <button className="py-1 rounded-full bg-black max-w-[180px] text-white font-semibold cursor-pointer text-[14px]">
+                {/* <Link href="/shop" className="px-4 py-2"> */}
+                Shoping Now
+                {/* </Link> */}
+              </button>
+            </div>
+            <div className=" hidden mdl:flex w-3/5 h-full  justify-center items-center">
+              <Image
+                src={CatyThere}
+                alt="bannerImgTwo"
+                width={500}
+                height={500}
+                quality={100}
+                // sizes="max-width: 480px"
+                // fill={true}
+              />
+            </div>
+            {/* <img src= alt="aa" className="w-16 h-16" /> */}
           </div>
         </Link>
       </Slider>
@@ -126,59 +227,13 @@ const Banner = () => {
 
 export default Banner;
 
-// banner with scc
-// import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-// const Banner = () => {
-
-// const slides = [
-//   {
-//     url: bannerImgOne,
-//     //  "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2620&q=80",
-//   },
-//   {
-//     url: bannerImgTwo,
-//     //  "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
-//   },
-//   {
-//     url: bannerImgThree,
-//     //  "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80",
-//   },
-// ];
-
-// const [currentIndex, setCurrentIndex] = useState(0);
-
-// const prevSlide = () => {
-//   const isFirstSlide = currentIndex === 0;
-//   const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-//   setCurrentIndex(newIndex);
-// };
-
-// const nextSlide = () => {
-//   const isLastSlide = currentIndex === slides.length - 1;
-//   const newIndex = isLastSlide ? 0 : currentIndex + 1;
-//   setCurrentIndex(newIndex);
-// };
-
-// const goToSlide = (slideIndex) => {
-//   setCurrentIndex(slideIndex);
-// };
-// <div className="max-w-[1400px] h-[420px] w-full relative group">
-//       <Image
-//         src={slides[currentIndex].url}
-//         // style={{
-//         //   backgroundImage: `url(${slides[currentIndex].url})`,
-//         // }}
-//         className="w-full h-full  bg-center bg-cover duration-500 relative object-none object-center"
-//       ></Image>
-
-//       {/* Left Arrow */}
-//       <div className="absolute top-0 right-0 w-full h-full">
-//         <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-//           <BsChevronCompactLeft onClick={prevSlide} size={30} />
-//         </div>
-//         {/* Right Arrow */}
-//         <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-//           <BsChevronCompactRight onClick={nextSlide} size={30} />
-//         </div>
-//       </div>
-//     </div>
+// <Link href="/shop">
+// <div>
+//   <Image src={bannerImgTwo} alt="bannerImgTwo" />
+// </div>
+// </Link>
+// <Link href="/shop">
+// <div>
+//   <Image src={bannerImgThree} alt="bannerImgThree" />
+// </div>
+// </Link>

@@ -158,11 +158,10 @@ const Navbar = () => {
                             transition={{ duration: 0.4 }}
                             className="text-sm flex flex-col gap-1"
                           >
-                            <li className="headerSedenavLi">New Arrivals</li>
-                            <li className="headerSedenavLi">Gudgets</li>
-                            <li className="headerSedenavLi">Accessories</li>
-                            <li className="headerSedenavLi">Electronics</li>
-                            <li className="headerSedenavLi">Others</li>
+                            <li className="headerSedenavLi">Man</li>
+                            <li className="headerSedenavLi">Woman</li>
+                            <li className="headerSedenavLi">Children</li>
+                            <li className="headerSedenavLi">All</li>
                           </motion.ul>
                         )}
                       </div>
@@ -181,11 +180,10 @@ const Navbar = () => {
                             transition={{ duration: 0.4 }}
                             className="text-sm flex flex-col gap-1"
                           >
-                            <li className="headerSedenavLi">New Arrivals</li>
-                            <li className="headerSedenavLi">Gudgets</li>
-                            <li className="headerSedenavLi">Accessories</li>
-                            <li className="headerSedenavLi">Electronics</li>
-                            <li className="headerSedenavLi">Others</li>
+                            <li className="headerSedenavLi">New</li>
+                            <li className="headerSedenavLi">Top</li>
+                            <li className="headerSedenavLi">Best Sale</li>
+                            <li className="headerSedenavLi">All</li>
                           </motion.ul>
                         )}
                       </div>
