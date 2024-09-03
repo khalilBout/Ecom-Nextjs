@@ -129,7 +129,7 @@ export const Logo = () => {
           </linearGradient>
         </defs>
       </svg> */}
-      <h1 className="text-2xl">EComercee</h1>
+      <h1 className="text-2xl">Elegance</h1>
     </div>
   );
 };

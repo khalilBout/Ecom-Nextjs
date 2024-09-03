@@ -2,19 +2,10 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-// import { man } from "@/public/images/banner/man3.png";
-
-// images
-// import { bannerImgOne } from "@/public/images/index";
-// import { bannerImgTwo } from "@/public/images/index";
-// import { bannerImgThree } from "@/public/images/index";
 
 import { CatyOne } from "@/public/images/index";
 import { CatyTow } from "@/public/images/index";
 import { CatyThere } from "@/public/images/index";
-
-import chld from "@/public/images/banner/woman.png";
-import woman from "@/public/images/banner/woman.png";
 
 import Link from "next/link";
 
