@@ -56,7 +56,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full h-20 bg-white sticky top-0 z-50 border-b-[1px] border-b-gray-200">
+      <div className="w-full h-20 backdrop-blur-md sticky top-0 z-50 border-b-[1px] border-b-gray-200">
         <nav className="h-full px-8 max-w-container mx-auto relative">
           <div className="flex items-center justify-between h-full">
             <div className="w-150px overflow-hidden">
@@ -75,7 +75,7 @@ const Navbar = () => {
                     {navBarList.map((item) => (
                       <Link
                         key={item._id}
-                        className="flex font-normal hover:font-bold font-bodyFont w-20 h-6 justify-center items-center px-6 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                        className="flex font-normal hover:font-bold font-bodyFont w-20 h-6 justify-center items-center px-6 text-base text-gray-800 hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
                         href={item.link}
                       >
                         <li>{item.title}</li>
@@ -85,7 +85,7 @@ const Navbar = () => {
                     session?.data.user.role === "admin" ? (
                       <Link
                         key="dashboard"
-                        className="flex hover:font-bold  w-20 h-6 justify-center items-center px-12 text-base text-red-400 font-bodyFont font-semibold hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0 "
+                        className="flex hover:font-bold  w-20 h-6 justify-center items-center px-12 text-base text-red-600 font-bodyFont font-semibold hover:underline  underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0 "
                         href="/dashboard"
                       >
                         <li>Dashboard</li>
@@ -93,7 +93,7 @@ const Navbar = () => {
                     ) : (
                       <Link
                         key="contact"
-                        className="flex font-normal font-bodyFont hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
+                        className="flex font-normal font-bodyFont hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-gray-800 hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0"
                         href="/contact"
                       >
                         <li>Contact</li>

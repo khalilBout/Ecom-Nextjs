@@ -31,7 +31,7 @@ const pageProduct = async ({ searchParams }) => {
             <PaginationCom count={count} />
             <div className="w-full flex justify-end ">
               <Link href="/dashboard/products/addProduct">
-                <button className="mx-2 text-sm font-medium py-2 px-4 rounded-md rounded-bl-md  bg-green-300 text-primeColor hover:text-lightText hover:bg-primeColor">
+                <button className="mx-2 text-sm font-medium py-2 px-4 rounded-md rounded-bl-md bg-green-300 text-primeColor hover:text-lightText hover:bg-primeColor">
                   Add Product
                 </button>
               </Link>

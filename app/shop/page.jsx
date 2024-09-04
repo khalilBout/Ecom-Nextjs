@@ -15,7 +15,7 @@ const page = async ({ searchParams }) => {
   const { allProducts, count } = await getProducts(search, page, category);
 
   return (
-    <div className="mx-10">
+    <div className="mx-6">
       <SearchNav />
       <div className="max-w-container mx-auto px-4">
         <div className="w-full h-full flex pb-20 gap-10">

@@ -3,7 +3,7 @@ import Product from "@/app/components/ProductItems/Product";
 const DisplayProduct = ({ allProducts, count }) => {
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mdl:gap-4 lg:gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mdl:gap-4 lg:gap-10">
         {allProducts?.map((product) => (
           <div key={product._id} className="w-full">
             <Product product={product} />

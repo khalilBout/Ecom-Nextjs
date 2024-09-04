@@ -2,6 +2,10 @@ import Image from "next/image";
 import React from "react";
 
 const OrderInfo = ({ order }) => {
+  const totalPrixProduct = order?.orderProduct.reduce(
+    (total, item) => item.finalPrice * item.quantity + total,
+    0
+  );
   return (
     <article className="p-3 lg:p-5 mb-5 bg-white border border-blue-600 rounded-md ">
       <header className="lg:flex justify-between mb-4 ">
@@ -78,7 +82,7 @@ const OrderInfo = ({ order }) => {
           <ul className="text-gray-900">
             <li>
               Total Paid:{" "}
-              <span className="text-gray-600">{order.totolPyment} $</span>
+              <span className="text-gray-600">{totalPrixProduct} $</span>
             </li>
             <li>
               Tax Delivery:{" "}

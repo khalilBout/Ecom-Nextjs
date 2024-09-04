@@ -11,8 +11,8 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="w-full relative flex justify-center">
-        <div className="w-full lgl:w-[750px] px-6 py-6">
+      <div className="relative flex justify-center">
+        <div className=" lgl:w-[750px] px-6 py-6">
           <SearchInput />
         </div>
       </div>

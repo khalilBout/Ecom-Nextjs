@@ -35,6 +35,14 @@ export const PUT = async (request, { params }) => {
   const dataOrder = await request.json();
   // const { newDataOrder } = await request.json();
   // update order (update value to isProcess  )
+
+  // console.log("data update:", dataOrder.orderProduct);
+  const newTaxDelivery = +dataOrder.taxDelivery;
+  const newTotalPyment = dataOrder.orderProduct.reduce(
+    (total, item) => item.PriceAfterDesc + total,
+    newTaxDelivery
+  );
+
   const newOrder = {
     // client: dataOrder.newClient,
     userId: dataOrder.userId,
@@ -42,6 +50,7 @@ export const PUT = async (request, { params }) => {
     email: dataOrder.email,
     taxDelivery: dataOrder.taxDelivery,
     orderProduct: dataOrder.orderProduct,
+    totolPyment: newTotalPyment,
     shippingAddress: dataOrder.shippingAddress,
     isProcess: false,
   };

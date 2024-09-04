@@ -1,12 +1,15 @@
 "use clinet";
-import { GlobalContext } from "@/services/context/GlobalContext";
+// import { GlobalContext } from "@/services/context/GlobalContext";
 import Link from "next/link";
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 
 const TotalsCart = ({ taxDelivery }) => {
-  const { cart } = useContext(GlobalContext);
+  // const { cart } = useContext(GlobalContext);
+  const cart = useSelector((state) => state.Cart.cartProducts);
+  // const dispatch = useDispatch();
 
-  const priceList = cart?.cartItems.map((x) => x.finalPrice * x.Qt);
+  const priceList = cart?.map((x) => x.finalPrice * x.Qt);
   const totalPrice = priceList?.reduce((a, c) => a + c, 0);
   const shippingCharge = taxDelivery;
 
