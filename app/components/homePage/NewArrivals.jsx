@@ -3,7 +3,8 @@ import { getAllProducts } from "@/services/getData/product";
 import Arrivals from "./Arrivals";
 
 const NewArrivals = async () => {
-  const products = await getAllProducts();
+  const AllProducts = await getAllProducts();
+  const products = await AllProducts.slice(-8);
   return (
     <>
       <Arrivals products={products} />

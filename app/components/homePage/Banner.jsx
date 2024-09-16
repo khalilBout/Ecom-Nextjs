@@ -211,6 +211,7 @@ const Banner = () => {
             {/* <img src= alt="aa" className="w-16 h-16" /> */}
           </div>
         </Link>
+        
       </Slider>
     </div>
   );

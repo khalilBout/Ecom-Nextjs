@@ -16,10 +16,10 @@ export default async function Home() {
       <div className="max-w-container mx-auto px-4">
         <Sale />
         <NewArrivals />
-        <BestSellers />
+        {/* <BestSellers /> */}
 
         {/* <YearProduct /> */}
-        <NewProducts />
+        {/* <NewProducts /> */}
       </div>
     </>
   );
